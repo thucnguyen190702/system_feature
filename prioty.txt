@@ -1,0 +1,42 @@
+Thứ tự thực thi đề xuất:
+1. Friend System
+
+Nền tảng xã hội cơ bản
+Không phụ thuộc vào hệ thống nào khác
+Cần thiết cho hầu hết các hệ thống còn lại
+2. Game Chat System
+
+Phụ thuộc nhẹ vào Friend System (private chat)
+Cần thiết cho Clan System
+Có thể triển khai song song với Friend System
+3. Achievement System
+
+Độc lập, không phụ thuộc nhiều
+Tạo nội dung và động lực chơi
+Dữ liệu thành tựu dùng cho Leaderboard và Battle Pass
+4. Leaderboard System
+
+Phụ thuộc: Friend System (Friends Leaderboard)
+Cần có metrics từ Achievement/gameplay
+Tạo động lực cạnh tranh
+5. Clan System
+
+Phụ thuộc: Friend System, Chat System
+Sử dụng Leaderboard cho Clan rankings
+Cần có cộng đồng người chơi ổn định
+6. Battle Pass System
+
+Phụ thuộc: Achievement System (missions), Leaderboard (competitive missions)
+Mô hình monetization cần player base
+Tích hợp với nhiều gameplay mechanics
+7. Live Events System
+
+Phụ thuộc: Tất cả các hệ thống trên
+Phức tạp nhất, cần operations team
+Post-launch content và long-term retention
+Lộ trình triển khai:
+
+Phase 1 (Tháng 1-2): Friend + Chat → Xã hội cơ bản
+Phase 2 (Tháng 3): Achievement + Leaderboard → Engagement
+Phase 3 (Tháng 4): Clan → Community
+Phase 4 (Tháng 5-6): Battle Pass + Live Events → Monetization & Retention

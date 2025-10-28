@@ -1,0 +1,284 @@
+# Implementation Plan
+
+- [ ] 1. Set up project structure and core data models
+  - Create directory structure for models, services, repositories, and UI components
+  - Define TypeScript interfaces for Season, Player Progress, Mission, and Reward entities
+  - Set up database connection configuration and utilities
+  - _Requirements: 1.1, 2.1, 3.1, 8.1_
+
+- [ ] 2. Implement database schema and repositories
+  - [ ] 2.1 Create database migration scripts for all tables
+    - Write migration for seasons, season_tiers, player_season_progress tables
+    - Write migration for missions, mission_objectives, player_mission_progress tables
+    - Write migration for claimed_rewards and xp_transactions tables
+    - Add indexes for optimized queries on player_id, season_id, and mission_id
+    - _Requirements: 8.1, 8.2, 8.3, 8.4_
+  - [ ] 2.2 Implement Season Repository
+    - Write methods for CRUD operations on seasons and season tiers
+    - Implement getCurrentActiveSeason() method with caching
+    - Implement getSeasonById() with tier configurations
+    - _Requirements: 1.1, 9.1, 9.2_
+  - [ ] 2.3 Implement Player Repository
+    - Write methods for player season progress CRUD operations
+    - Implement getPlayerProgress() with claimed rewards
+    - Implement updatePlayerProgress() with optimistic locking
+    - _Requirements: 8.1, 8.2, 8.5_
+  - [ ] 2.4 Implement Mission Repository
+    - Write methods for mission and objective CRUD operations
+    - Implement getActiveMissions() filtered by date and type
+    - Implement player mission progress tracking methods
+    - _Requirements: 3.1, 3.2, 3.5, 9.5_
+
+- [ ] 3. Implement Progression Manager core logic
+  - [ ] 3.1 Implement XP calculation functions
+    - Write calculateTierForXP() to determine tier from total XP
+    - Write calculateXPRequiredForTier() to get cumulative XP for a tier
+    - Write calculateXPToNextTier() to get remaining XP needed
+    - _Requirements: 2.1, 2.4_
+  - [ ] 3.2 Implement tier advancement logic
+    - Write advanceTier() to update player tier and handle multi-tier jumps
+    - Implement validation to prevent exceeding max tier
+    - _Requirements: 2.4, 6.3, 6.4_
+  - [ ] 3.3 Implement reward availability logic
+    - Write getAvailableRewards() to list claimable rewards
+    - Write canClaimReward() to validate reward eligibility
+    - Implement checks for tier reached, premium pass ownership, and already claimed
+    - _Requirements: 5.1, 5.3, 5.4_
+  - [ ]* 3.4 Write unit tests for Progression Manager
+    - Test XP to tier calculations with edge cases (0 XP, max XP, tier boundaries)
+    - Test tier advancement with single and multiple tier jumps
+    - Test reward eligibility with various player states
+    - _Requirements: 2.1, 2.4, 5.1, 5.4_
+
+- [ ] 4. Implement Mission Service
+  - [ ] 4.1 Implement mission retrieval methods
+    - Write getActiveMissions() to fetch missions for current season
+    - Write getDailyMissions() and getWeeklyMissions() with filtering
+    - Merge mission configs with player progress data
+    - _Requirements: 3.1, 3.2_
+  - [ ] 4.2 Implement mission progress tracking
+    - Write trackEvent() to record player actions (matches played, kills, etc.)
+    - Write updateMissionProgress() to increment objective values
+    - Implement real-time progress updates with debouncing
+    - _Requirements: 3.3_
+  - [ ] 4.3 Implement mission completion logic
+    - Write checkMissionCompletion() to validate all objectives completed
+    - Write completeMission() to mark mission complete and award XP
+    - Trigger XP award through Battle Pass Service
+    - _Requirements: 2.2, 2.3, 3.4_
+  - [ ] 4.4 Implement mission reset functionality
+    - Write resetDailyMissions() scheduled job for daily reset
+    - Write resetWeeklyMissions() scheduled job for weekly reset
+    - Generate new missions from mission pool
+    - _Requirements: 3.5_
+  - [ ]* 4.5 Write unit tests for Mission Service
+    - Test mission filtering by type and date
+    - Test progress tracking with various event types
+    - Test mission completion detection and XP award
+    - _Requirements: 3.1, 3.3, 3.4_
+
+- [ ] 5. Implement Battle Pass Service
+  - [ ] 5.1 Implement season management methods
+    - Write getCurrentSeason() with caching strategy
+    - Write getSeasonById() with tier and reward data
+    - _Requirements: 1.1_
+  - [ ] 5.2 Implement player progress methods
+    - Write getPlayerProgress() to fetch current season progress
+    - Implement progress caching with 5-minute TTL
+    - _Requirements: 8.5_
+  - [ ] 5.3 Implement XP award flow
+    - Write awardXP() to add XP and check for tier advancement
+    - Log XP transaction to xp_transactions table
+    - Trigger tier advancement if threshold reached
+    - Return XPAwardResult with tier changes
+    - _Requirements: 2.1, 2.4, 2.5, 8.1_
+  - [ ] 5.4 Implement Premium Pass purchase
+    - Write purchasePremiumPass() with currency validation
+    - Verify player has sufficient premium currency
+    - Update player progress with premium pass ownership
+    - Mark all reached premium rewards as available
+    - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 8.4_
+  - [ ] 5.5 Implement tier skip purchase
+    - Write purchaseTierSkips() with validation
+    - Calculate total cost for requested tier count
+    - Advance player tier by purchased amount
+    - Mark newly reached rewards as available
+    - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5_
+  - [ ] 5.6 Implement Season Bundle purchase
+    - Write purchaseSeasonBundle() combining premium pass and tier skips
+    - Calculate bundle discount and validate payment
+    - Grant premium pass and advance tiers atomically
+    - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
+  - [ ] 5.7 Implement reward claiming
+    - Write claimReward() with eligibility validation
+    - Add reward item to player inventory
+    - Record claim in claimed_rewards table
+    - Trigger reward claim animation event
+    - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 8.3_
+  - [ ] 5.8 Implement batch reward claiming
+    - Write claimAllAvailableRewards() to claim multiple rewards
+    - Process claims in transaction for atomicity
+    - Return list of claimed rewards
+    - _Requirements: 5.1, 5.2, 5.3_
+  - [ ]* 5.9 Write integration tests for Battle Pass Service
+    - Test complete flow: mission completion → XP award → tier advancement → reward claim
+    - Test premium pass purchase unlocking premium rewards
+    - Test tier skip purchase advancing multiple tiers
+    - Test error handling for insufficient currency and invalid operations
+    - _Requirements: 2.1-2.5, 4.1-4.5, 5.1-5.5, 6.1-6.5_
+
+- [ ] 6. Implement notification system
+  - [ ] 6.1 Implement notification methods
+    - Write getUnclaimedRewardCount() to count available rewards
+    - Write shouldShowSeasonEndWarning() for 7-day warning
+    - _Requirements: 10.2, 10.3_
+  - [ ] 6.2 Implement notification triggers
+    - Trigger new season notification on season start
+    - Trigger mission completion toast notification
+    - Trigger tier level-up notification with animation
+    - Trigger daily mission reset notification
+    - _Requirements: 10.1, 10.4, 10.5, 2.5_
+
+- [ ] 7. Implement Battle Pass UI components
+  - [ ] 7.1 Create Battle Pass main screen component
+    - Build dual-track reward display with scrollable tier list
+    - Display season information (name, end date, countdown timer)
+    - Show player progress bar with current tier and XP
+    - Implement reward preview on hover with 3D view or detailed info
+    - Add Premium Pass purchase button with price
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
+  - [ ] 7.2 Create reward claim UI
+    - Build claim button for each unlocked reward
+    - Implement reward claim animation sequence (scale, glow, particles, fly-to-inventory)
+    - Display success toast notification after claim
+    - Add "Claim All" button for batch claiming
+    - _Requirements: 5.1, 5.2, 5.3, 5.5_
+  - [ ] 7.3 Create Premium Pass purchase modal
+    - Build modal with all premium rewards preview (scrollable)
+    - Display price and payment options
+    - Show "instant unlock" message for current tier rewards
+    - Implement purchase confirmation flow
+    - Display success animation after purchase
+    - _Requirements: 4.1, 4.2, 4.3, 4.4_
+  - [ ] 7.4 Create tier skip purchase UI
+    - Build tier skip selector with quantity input
+    - Display total cost calculation dynamically
+    - Show preview of rewards that will be unlocked
+    - Implement purchase confirmation
+    - _Requirements: 6.1, 6.2, 6.3, 6.4_
+  - [ ] 7.5 Create Season Bundle purchase UI
+    - Build bundle card with included items (premium pass + tier skips)
+    - Display discount percentage compared to separate purchases
+    - Implement purchase flow
+    - _Requirements: 7.1, 7.2, 7.5_
+
+- [ ] 8. Implement Mission UI components
+  - [ ] 8.1 Create mission list screen
+    - Build separate sections for daily and weekly missions
+    - Display mission title, description, and XP reward
+    - Show progress bar for each mission objective
+    - Display countdown timer for mission refresh
+    - _Requirements: 3.1, 3.2_
+  - [ ] 8.2 Implement mission progress updates
+    - Update progress bars in real-time as player makes progress
+    - Display completion checkmark when mission completed
+    - Show XP earned notification on completion
+    - _Requirements: 3.3, 3.4_
+
+- [ ] 9. Implement notification UI components
+  - [ ] 9.1 Create notification badge system
+    - Display badge on Battle Pass menu button when unclaimed rewards exist
+    - Show count of unclaimed rewards
+    - _Requirements: 10.2_
+  - [ ] 9.2 Create toast notification component
+    - Build toast for mission completion with XP amount
+    - Build toast for tier level-up with new tier number
+    - Build toast for new daily missions available
+    - Implement auto-dismiss after 5 seconds
+    - _Requirements: 10.4, 10.5, 2.5_
+  - [ ] 9.3 Create season notifications
+    - Build full-screen modal for new season announcement
+    - Display featured rewards and season theme
+    - Build warning banner for season ending soon (7 days or less)
+    - _Requirements: 10.1, 10.3_
+
+- [ ] 10. Implement admin interface for season management
+  - [ ] 10.1 Create season creation form
+    - Build form for season basic info (name, start date, end date)
+    - Add tier count configuration (10-200 tiers)
+    - Add pricing configuration (premium pass, tier skip, bundle)
+    - _Requirements: 9.1, 9.2_
+  - [ ] 10.2 Create tier configuration interface
+    - Build tier editor for assigning rewards to each tier
+    - Allow setting XP requirement per tier
+    - Support drag-and-drop for reward assignment
+    - Preview tier progression curve
+    - _Requirements: 9.2, 9.3, 9.4_
+  - [ ] 10.3 Create mission configuration interface
+    - Build mission creator for daily/weekly/seasonal missions
+    - Add objective editor with tracking key configuration
+    - Set XP rewards and availability dates
+    - _Requirements: 9.5_
+  - [ ]* 10.4 Create season preview and testing tools
+    - Build season preview mode for admins to test progression
+    - Add tools to simulate XP gains and tier advancement
+    - Implement mission completion simulation
+    - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
+
+- [ ] 11. Implement caching and performance optimizations
+  - [ ] 11.1 Implement caching layer
+    - Set up Redis or in-memory cache for season configs (1 hour TTL)
+    - Cache player progress data (5 minutes TTL)
+    - Cache mission lists (15 minutes TTL)
+    - Implement cache invalidation on updates
+    - _Requirements: 8.1, 8.2, 8.5_
+  - [ ] 11.2 Optimize database queries
+    - Add database indexes on frequently queried columns
+    - Implement batch operations for mission progress updates
+    - Use read replicas for heavy read operations
+    - _Requirements: 1.1, 3.1, 8.5_
+  - [ ] 11.3 Implement API optimizations
+    - Add pagination for tier lists (20 tiers per page)
+    - Implement lazy loading for reward details
+    - Enable gzip compression for API responses
+    - _Requirements: 1.1_
+
+- [ ] 12. Implement security and anti-cheat measures
+  - [ ] 12.1 Implement server-side validation
+    - Validate all XP awards on server before applying
+    - Validate tier advancement calculations server-side
+    - Validate purchase transactions with payment provider
+    - _Requirements: 2.1, 4.2, 6.2, 7.2_
+  - [ ] 12.2 Implement rate limiting
+    - Add rate limits on API endpoints (100 requests per minute per player)
+    - Implement exponential backoff for repeated failed requests
+    - _Requirements: 2.1, 5.1_
+  - [ ] 12.3 Implement transaction logging and audit trail
+    - Log all XP transactions with source and timestamp
+    - Log all purchases with transaction IDs
+    - Log all reward claims
+    - Implement anomaly detection for suspicious patterns
+    - _Requirements: 8.1, 8.3, 8.4_
+
+- [ ] 13. Integration and end-to-end wiring
+  - [ ] 13.1 Wire Mission Service to Battle Pass Service
+    - Connect mission completion to XP award flow
+    - Ensure mission XP is properly credited to player progress
+    - _Requirements: 2.2, 2.3, 3.4_
+  - [ ] 13.2 Wire UI components to services
+    - Connect Battle Pass UI to Battle Pass Service API
+    - Connect Mission UI to Mission Service API
+    - Connect notification UI to notification triggers
+    - Implement error handling and loading states in UI
+    - _Requirements: 1.1-1.5, 3.1-3.5, 5.1-5.5, 10.1-10.5_
+  - [ ] 13.3 Implement scheduled jobs
+    - Set up daily mission reset job (runs at midnight UTC)
+    - Set up weekly mission reset job (runs Monday midnight UTC)
+    - Set up season end job to archive completed seasons
+    - _Requirements: 3.5_
+  - [ ]* 13.4 Perform end-to-end testing
+    - Test complete user journey: view season → complete missions → earn XP → level up → claim rewards
+    - Test purchase flows: premium pass, tier skips, season bundle
+    - Test edge cases: season end, mission expiration, max tier reached
+    - Test cross-session persistence: logout and login to verify progress saved
+    - _Requirements: All requirements_

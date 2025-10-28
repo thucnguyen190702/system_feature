@@ -1,0 +1,435 @@
+# Implementation Plan
+
+- [ ] 1. Set up core data structures and enums
+  - Create EventType enum (Seasonal, Competitive, Cooperative, Crossover, Gacha)
+  - Create EventState enum (Scheduled, Active, Paused, Expired, Cancelled, Archived)
+  - Create ObjectiveType enum (Collect, Complete, Defeat, Reach, Participate)
+  - Create RewardType enum (Currency, Item, Character, Cosmetic, Booster)
+  - Create NotificationType enum (Preview, Start, Milestone, Urgency, Expiration)
+  - Implement EventTemplate class with all properties from design
+  - Implement EventInstance class with timing and customization fields
+  - Implement Objective class with tracking configuration
+  - Implement Milestone class with progress thresholds and rewards
+  - Implement RewardData class with rarity and exclusivity flags
+  - Implement EventProgress class with sync status tracking
+  - Implement ObjectiveProgress class with completion tracking
+  - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 4.1, 4.2, 5.1_
+
+- [ ] 2. Implement Event Manager core functionality
+  - [ ] 2.1 Create IEventManager interface with lifecycle methods
+    - Define CreateEventFromTemplate method signature
+    - Define ActivateEvent, DeactivateEvent, UpdateActiveEvents methods
+    - Define GetActiveEvents, GetUpcomingEvents, GetEventById query methods
+    - Define RegisterPlayerParticipation and IsPlayerEligible methods
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
+  - [ ] 2.2 Implement EventManager class with state machine
+    - Implement event state transitions (Scheduled → Active → Expired → Archived)
+    - Implement CreateEventFromTemplate with template loading and instantiation
+    - Implement ActivateEvent with validation and integration coordination
+    - Implement DeactivateEvent with cleanup logic
+    - Implement UpdateActiveEvents with delta time processing for countdowns
+    - Implement event expiration detection and automatic state transition
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 3.3, 3.4_
+  - [ ] 2.3 Implement event query and filtering methods
+    - Implement GetActiveEvents with state filtering
+    - Implement GetUpcomingEvents with time-based filtering
+    - Implement GetEventById with caching
+    - Implement player eligibility validation (level requirements, clan membership)
+    - _Requirements: 3.1, 3.2, 3.5_
+  - [ ] 2.4 Implement player participation tracking
+    - Implement RegisterPlayerParticipation with timestamp recording
+    - Track participant count per event
+    - Track completion count per event
+    - Implement participation history queries
+    - _Requirements: 12.1, 12.2_
+
+- [ ] 3. Implement Event Scheduler with intelligent spacing
+  - [ ] 3.1 Create IEventScheduler interface
+    - Define ScheduleEvent, ValidateSchedule, DetectConflicts methods
+    - Define GenerateCalendar and FilterEvents methods
+    - Define GetTimeUntilStart and GetTimeRemaining methods
+    - _Requirements: 3.1, 3.3, 3.4, 6.1, 6.2, 6.3_
+  - [ ] 3.2 Implement scheduling validation and conflict detection
+    - Implement concurrent event limit validation (max 4 total, max 2 per type)
+    - Implement minimum gap validation (48 hours between major events)
+    - Implement DetectConflicts with detailed conflict reporting
+    - Implement mini-event exemption logic for concurrent limits
+    - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5_
+  - [ ] 3.3 Implement calendar generation and filtering
+    - Implement GenerateCalendar with date range support
+    - Implement event filtering by type, status, and reward category
+    - Implement sorting by start time and priority
+    - _Requirements: 3.1, 3.2, 3.5_
+  - [ ] 3.4 Implement countdown timer calculations
+    - Implement GetTimeUntilStart with accurate time calculations
+    - Implement GetTimeRemaining with expiration detection
+    - Implement timer update optimization (update only when displayed)
+    - _Requirements: 3.3, 3.4_
+
+- [ ] 4. Implement Progression System with milestone tracking
+  - [ ] 4.1 Create IProgressionSystem interface
+    - Define RecordProgress, GetPlayerProgress, GetCompletionPercentage methods
+    - Define GetAchievedMilestones, HasReachedMilestone methods
+    - Define SyncProgressToServer, LoadProgressFromServer methods
+    - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5_
+  - [ ] 4.2 Implement progress recording and calculation
+    - Implement RecordProgress with objective validation
+    - Implement progress aggregation for multiple objectives
+    - Implement GetCompletionPercentage with weighted calculation
+    - Implement real-time progress updates (< 1 second latency)
+    - _Requirements: 4.1, 4.2_
+  - [ ] 4.3 Implement milestone detection and unlocking
+    - Implement milestone threshold checking (25%, 50%, 75%, 100%)
+    - Implement GetAchievedMilestones with unlock tracking
+    - Implement HasReachedMilestone validation
+    - Trigger reward unlock notifications when milestones reached
+    - _Requirements: 4.3, 4.4_
+  - [ ] 4.4 Implement progress persistence and synchronization
+    - Implement local progress data storage with timestamps
+    - Implement SyncProgressToServer with retry queue
+    - Implement LoadProgressFromServer with conflict resolution
+    - Implement 30-second automatic sync interval
+    - Implement sync status indicator for UI
+    - _Requirements: 4.5_
+  - [ ] 4.5 Implement cooperative event progress aggregation
+    - Implement clan-wide progress calculation from individual contributions
+    - Implement individual contribution percentage tracking
+    - Implement real-time clan progress updates
+    - _Requirements: 8.2, 8.3, 8.5_
+
+- [ ] 5. Implement Notification Service with multi-channel delivery
+  - [ ] 5.1 Create INotificationService interface
+    - Define ShowPopup, ShowBanner, SendPushNotification methods
+    - Define ScheduleNotification, CancelScheduledNotifications methods
+    - Define RecordNotificationShown, RecordNotificationClicked methods
+    - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
+  - [ ] 5.2 Implement in-game notification display
+    - Implement ShowPopup with event data and direct access button
+    - Implement ShowBanner with countdown timer and quick access
+    - Implement notification priority queue for multiple simultaneous notifications
+    - Implement popup auto-dismiss after 10 seconds
+    - _Requirements: 2.2, 2.3_
+  - [ ] 5.3 Implement notification scheduling system
+    - Implement ScheduleNotification with trigger time calculation
+    - Schedule preview notification 24 hours before event start
+    - Schedule start notification at event activation
+    - Schedule urgency notification 2 hours before expiration
+    - Schedule expiration warning 1 hour before end with unclaimed rewards check
+    - _Requirements: 2.1, 2.4, 2.5_
+  - [ ] 5.4 Implement push notification integration
+    - Implement SendPushNotification with permission check
+    - Implement push notification retry logic (1 retry after 1 hour)
+    - Implement fallback to in-game notification on next login
+    - _Requirements: 2.5_
+  - [ ] 5.5 Implement notification tracking and analytics
+    - Implement RecordNotificationShown with timestamp
+    - Implement RecordNotificationClicked with conversion tracking
+    - Track notification delivery success rate
+    - _Requirements: 12.1, 12.2_
+
+- [ ] 6. Implement Reward Distribution System
+  - [ ] 6.1 Create IRewardDistributionSystem interface
+    - Define CanClaimReward, ClaimReward, AutoClaimExpiredRewards methods
+    - Define GetAvailableRewards, GetClaimedRewards methods
+    - Define DistributeRewards method
+    - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
+  - [ ] 6.2 Implement reward eligibility validation
+    - Implement CanClaimReward with milestone completion check
+    - Implement player level requirement validation
+    - Implement event participation validation
+    - _Requirements: 5.1_
+  - [ ] 6.3 Implement reward claiming flow
+    - Implement ClaimReward with eligibility verification
+    - Implement reward distribution to inventory integration
+    - Implement claim button enable/disable logic
+    - Implement reward acquisition animation trigger
+    - Display reward summary screen after claiming
+    - _Requirements: 5.2_
+  - [ ] 6.4 Implement auto-claim for expired events
+    - Implement expiration detection with 24-hour grace period
+    - Implement AutoClaimExpiredRewards for all earned milestones
+    - Send warning notification 1 hour before auto-claim
+    - _Requirements: 5.3, 5.4_
+  - [ ] 6.5 Implement overflow inbox for full inventory
+    - Detect inventory capacity before reward distribution
+    - Send rewards to overflow inbox when inventory full
+    - Implement 30-day expiration for inbox items
+    - Notify player of pending inbox rewards
+    - _Requirements: 5.5_
+
+- [ ] 7. Implement Leaderboard Integration for competitive events
+  - [ ] 7.1 Create ILeaderboardIntegration interface
+    - Define CreateEventLeaderboard, UpdatePlayerScore methods
+    - Define GetPlayerRanking, GetTopPlayers methods
+    - Define FinalizeLeaderboard method
+    - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
+  - [ ] 7.2 Implement competitive event leaderboard creation
+    - Implement CreateEventLeaderboard with event-specific scoring rules
+    - Configure ranking algorithm based on event type
+    - Initialize leaderboard on competitive event activation
+    - _Requirements: 7.1_
+  - [ ] 7.3 Implement real-time ranking updates
+    - Implement UpdatePlayerScore with < 5 second latency
+    - Implement efficient ranking recalculation
+    - Implement rank change notifications
+    - _Requirements: 7.2_
+  - [ ] 7.4 Implement leaderboard display in event UI
+    - Implement GetPlayerRanking with current rank and score
+    - Implement GetTopPlayers for top 100 display
+    - Display distance to next rank tier
+    - _Requirements: 7.3_
+  - [ ] 7.5 Implement leaderboard finalization and reward distribution
+    - Implement FinalizeLeaderboard on event expiration
+    - Determine reward tiers based on final rankings
+    - Trigger tier-based reward distribution
+    - Implement anti-cheat validation with statistical analysis
+    - _Requirements: 7.4, 7.5_
+
+- [ ] 8. Implement Clan Integration for cooperative events
+  - [ ] 8.1 Create IClanIntegration interface
+    - Define RecordClanContribution, GetClanProgress methods
+    - Define GetMemberContributions, BroadcastToOnlineClanMembers methods
+    - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
+  - [ ] 8.2 Implement clan contribution tracking
+    - Implement RecordClanContribution with individual and aggregate tracking
+    - Calculate individual contribution percentages
+    - Implement 5% minimum participation threshold validation
+    - _Requirements: 8.2, 8.5_
+  - [ ] 8.3 Implement clan progress aggregation
+    - Implement GetClanProgress with total clan progress calculation
+    - Aggregate individual contributions to shared objectives
+    - Display clan-wide progress in event UI
+    - _Requirements: 8.1, 8.2_
+  - [ ] 8.4 Implement clan member contribution display
+    - Implement GetMemberContributions with ranking
+    - Display individual contribution percentages
+    - Show member contribution leaderboard within clan
+    - _Requirements: 8.5_
+  - [ ] 8.5 Implement clan notification broadcasting
+    - Implement BroadcastToOnlineClanMembers for contribution notifications
+    - Send notifications within 10 seconds of contribution
+    - Implement milestone achievement broadcasts to clan
+    - _Requirements: 8.3_
+  - [ ] 8.6 Implement clan reward distribution
+    - Distribute rewards to all members meeting participation threshold
+    - Validate 5% minimum contribution before reward eligibility
+    - Handle offline members with pending rewards
+    - _Requirements: 8.4_
+
+- [ ] 9. Implement Event Template System for reusability
+  - [ ] 9.1 Create template library structure
+    - Implement template storage with categorization (type, complexity)
+    - Implement template tagging system
+    - Implement template versioning with change history
+    - _Requirements: 10.1, 10.3_
+  - [ ] 9.2 Implement template creation and customization
+    - Implement CreateFromTemplate with template loading
+    - Implement theme customization (colors, backgrounds, icons)
+    - Implement reward pool customization
+    - Implement narrative context customization
+    - Clone objectives and milestones from template
+    - _Requirements: 10.2_
+  - [ ] 9.3 Implement template performance tracking
+    - Track template usage count
+    - Track average engagement score per template
+    - Track completion rate per template
+    - Track last used timestamp
+    - _Requirements: 10.4_
+  - [ ] 9.4 Implement template library UI
+    - Display templates with filters (type, complexity, performance)
+    - Show template preview with mechanics and historical data
+    - Implement template selection workflow
+    - _Requirements: 10.3_
+
+- [ ] 10. Implement Personalization System with AI recommendations
+  - [ ] 10.1 Implement player profile data collection
+    - Track preferred game modes (PvP, PvE, Solo, Cooperative)
+    - Track average session duration and play frequency
+    - Track historical event participation and completion rates
+    - Track spending patterns and monetization segment
+    - Track difficulty progression and skill level
+    - _Requirements: 9.1_
+  - [ ] 10.2 Implement event recommendation engine
+    - Implement CalculateEngagementScore with multi-factor scoring
+    - Implement type affinity scoring based on preferences
+    - Implement difficulty match scoring based on skill level
+    - Implement time commitment scoring based on availability
+    - Implement reward relevance scoring based on current needs
+    - _Requirements: 9.2, 9.3, 9.4_
+  - [ ] 10.3 Implement personalized event display
+    - Display top 5 recommended events in calendar
+    - Sort recommendations by engagement score
+    - Update recommendations based on player feedback
+    - _Requirements: 9.2_
+  - [ ] 10.4 Implement adaptive difficulty system
+    - Detect struggling players with difficulty analysis
+    - Adjust objective targets dynamically (reduce by 20% for struggling players)
+    - Offer personalized assistance rewards (boosters, power-ups)
+    - _Requirements: 9.3_
+  - [ ] 10.5 Implement recommendation feedback loop
+    - Track recommendation click-through rate
+    - Track recommended event completion rate
+    - Update algorithm weights based on feedback signals
+    - _Requirements: 9.5_
+
+- [ ] 11. Implement Analytics Engine for performance tracking
+  - [ ] 11.1 Implement metrics collection
+    - Track participation rate (% of active players engaging within 24 hours)
+    - Track completion rate (% achieving 75%+ objectives)
+    - Track revenue per participating user (RPPU)
+    - Track conversion rate for event-specific offers
+    - Track 7-day retention impact (participants vs non-participants)
+    - _Requirements: 12.1, 12.2, 12.3, 12.4, 12.5_
+  - [ ] 11.2 Implement automated report generation
+    - Generate performance reports within 24 hours of event expiration
+    - Include participation trends over event duration
+    - Include completion distribution across milestones
+    - Include revenue analysis and monetization metrics
+    - _Requirements: 12.5_
+  - [ ] 11.3 Implement real-time analytics dashboard
+    - Display live participation count and rate
+    - Display live completion progress distribution
+    - Display live revenue metrics
+    - Update dashboard every 5 minutes
+    - _Requirements: 12.1, 12.2, 12.3_
+  - [ ] 11.4 Implement analytics data export
+    - Export event performance data to CSV/JSON
+    - Support custom date range queries
+    - Include player-level anonymized data
+    - _Requirements: 12.5_
+
+- [ ] 12. Implement Event UI System with thematic customization
+  - [ ] 12.1 Create Event Calendar UI component
+    - Display past, current, and upcoming events in chronological order
+    - Implement event filtering by type, reward, and status
+    - Display countdown timers for upcoming events (days, hours, minutes)
+    - Display remaining time for active events (hours, minutes)
+    - Implement event selection with detail view
+    - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
+  - [ ] 12.2 Create Event Detail UI component
+    - Display event description and narrative context
+    - Display objective list with target values
+    - Display reward preview for all milestones
+    - Display participation requirements (level, clan)
+    - Implement direct participation button
+    - _Requirements: 3.2_
+  - [ ] 12.3 Create Progress Tracker UI component
+    - Display current progress values and target values for each objective
+    - Display completion percentage with progress bar
+    - Display milestone markers at 25%, 50%, 75%, 100%
+    - Highlight unlocked milestones with visual feedback
+    - Update progress in real-time (< 1 second latency)
+    - _Requirements: 4.1, 4.2, 4.3_
+  - [ ] 12.4 Implement thematic UI customization
+    - Apply event-specific visual theme (backgrounds, colors, UI styling)
+    - Display thematic animations and particle effects
+    - Play thematic sound effects and music
+    - Support dynamic UI element replacement (icons, buttons)
+    - Integrate crossover branding assets when applicable
+    - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5_
+  - [ ] 12.5 Create Reward Claim UI component
+    - Display claim buttons with visual highlighting for available rewards
+    - Display notification badges for unclaimed rewards
+    - Implement reward acquisition animation on claim
+    - Display reward summary screen with all earned items
+    - Show unclaimed rewards warning before expiration
+    - _Requirements: 5.1, 5.2, 5.5_
+  - [ ] 12.6 Create Event Banner UI component
+    - Display prominent banner on main screen for active events
+    - Show event icon and countdown timer
+    - Implement quick access button to event interface
+    - Support multiple concurrent event banners with priority ordering
+    - _Requirements: 2.3_
+
+- [ ] 13. Implement error handling and recovery
+  - [ ] 13.1 Implement event lifecycle error handling
+    - Implement activation retry with exponential backoff (3 attempts)
+    - Log activation failures with detailed error information
+    - Display maintenance message to players on activation failure
+    - Implement event data validation on load with schema checking
+    - Fallback to safe default configuration for missing templates
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
+  - [ ] 13.2 Implement progression sync error handling
+    - Queue progress updates locally with timestamps on sync failure
+    - Retry sync on next network availability
+    - Implement conflict resolution (server authoritative for competitive events)
+    - Display sync status indicator in UI
+    - Implement checksum validation on sync
+    - Rollback client state if server rejects update
+    - _Requirements: 4.5_
+  - [ ] 13.3 Implement reward distribution error handling
+    - Send rewards to overflow inbox when inventory full
+    - Notify player of pending inbox rewards
+    - Implement 24-hour grace period for post-expiration claims
+    - Auto-claim all earned rewards at expiration + 24 hours
+    - Send notification before auto-claim occurs
+    - _Requirements: 5.3, 5.4, 5.5_
+  - [ ] 13.4 Implement notification delivery error handling
+    - Fallback to in-game notification on push notification failure
+    - Track delivery failures for analytics
+    - Retry push notification once after 1 hour
+    - _Requirements: 2.5_
+
+- [ ] 14. Implement caching and performance optimization
+  - [ ] 14.1 Implement event data caching
+    - Cache active event instances in memory
+    - Cache event templates with 1-hour TTL
+    - Cache player progress with write-through strategy
+    - Invalidate cache on event state changes
+    - _Requirements: All performance-related requirements_
+  - [ ] 14.2 Implement async background processing
+    - Process event activation/deactivation on separate thread
+    - Implement progress synchronization background queue
+    - Implement notification scheduling async pipeline
+    - Batch progress updates every 30 seconds
+    - _Requirements: 4.5_
+  - [ ] 14.3 Implement query optimization
+    - Index event instances by state and start time
+    - Index player progress by player ID and event ID
+    - Batch database queries where possible
+    - _Requirements: All query-related requirements_
+
+- [ ] 15. Write integration tests for event system
+  - [ ] 15.1 Test event lifecycle integration
+    - Test end-to-end flow: scheduled → active → expired
+    - Test player participation and progress tracking
+    - Test reward claiming and distribution
+    - Test notification delivery at key moments
+    - _Requirements: All requirements_
+  - [ ] 15.2 Test system integrations
+    - Test leaderboard integration for competitive events
+    - Test clan system integration for cooperative events
+    - Test inventory system integration for rewards
+    - Test push notification service integration
+    - _Requirements: 7.1-7.5, 8.1-8.5, 5.1-5.5_
+  - [ ] 15.3 Test error handling and recovery
+    - Test activation failure retry logic
+    - Test progress sync failure and recovery
+    - Test reward distribution with full inventory
+    - Test notification delivery failures
+    - _Requirements: All error handling requirements_
+
+- [ ] 16. Write performance tests
+  - [ ] 16.1 Test load scenarios
+    - Test 10,000 concurrent players in single event
+    - Test 5 concurrent active events with mixed participation
+    - Test progress sync under high network latency
+    - Test notification delivery at event start spike
+    - _Requirements: All performance requirements_
+  - [ ] 16.2 Test stress scenarios
+    - Test maximum concurrent events (10+)
+    - Test rapid event state transitions
+    - Test database query performance with large player base
+    - Test memory usage with extended play sessions
+    - _Requirements: All performance requirements_
+
+- [ ] 17. Wire everything together and create event management interface
+  - Integrate Event Manager with Scheduler for automatic activation/deactivation
+  - Integrate Progression System with Notification Service for milestone notifications
+  - Integrate Reward System with Inventory Integration for reward distribution
+  - Integrate Event Manager with Leaderboard Integration for competitive events
+  - Integrate Event Manager with Clan Integration for cooperative events
+  - Create EventSystemController as main entry point for all event operations
+  - Implement event creation workflow UI for game designers
+  - Implement event monitoring dashboard for operations team
+  - _Requirements: All requirements_

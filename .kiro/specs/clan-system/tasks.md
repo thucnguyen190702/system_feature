@@ -1,0 +1,533 @@
+# Implementation Plan - Hệ thống Clan (Guild)
+
+## Phase 1: Foundation (Core Clan Features)
+
+- [ ] 1. Set up project structure and core data models
+  - Create folder structure: Scripts/Clan/{Core, UI, Services, Models, Utils}
+  - Define all data model classes (Clan, ClanMember, ClanStats, MemberStats)
+  - Create enum types (ClanJoinMode, ActivityLevel, ClanRole)
+  - _Requirements: 1.1, 1.3, 2.1_
+
+- [ ] 2. Implement ClanManager core functionality
+  - [ ] 2.1 Create ClanManager singleton
+    - Implement initialization with playerId
+    - Set up event system (OnClanJoined, OnClanLeft, OnMemberJoined, OnMemberLeft)
+    - Create local cache for current clan data
+    - _Requirements: 1.1, 2.4, 2.5_
+  - [ ] 2.2 Implement clan creation
+    - Create CreateClan method with validation (name length 3-20 characters)
+    - Implement gold coin deduction (1000 coins)
+    - Allow setting description (max 200 characters), badge, and join mode
+    - Auto-assign creator as Leader
+    - _Requirements: 1.1, 1.2, 1.3, 1.4_
+  - [ ] 2.3 Implement clan search and join
+    - Create SearchClans method with filter support (name, tag, description)
+    - Implement filtering by member count, activity level, language, minimum level
+    - Add RequestJoinClan method for Open clans (immediate join)
+    - Add RequestJoinClan method for Closed clans (pending approval)
+    - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
+  - [ ] 2.4 Implement clan leave functionality
+    - Create LeaveClan method with confirmation dialog
+    - Remove player from clan channels and activities
+    - Implement 24-hour cooldown before joining another clan
+    - Handle leader leaving (transfer to Co-leader or disband)
+    - Send notification to all members
+    - _Requirements: 12.1, 12.2, 12.3, 12.4, 12.5_
+  - [ ]* 2.5 Write unit tests for ClanManager
+    - Test clan creation with valid/invalid inputs
+    - Test search and filtering logic
+    - Test join/leave operations
+    - Test cooldown enforcement
+    - _Requirements: 1.1, 2.1, 12.1_
+
+- [ ] 3. Implement member management system
+  - [ ] 3.1 Create member role system
+    - Define role hierarchy (Leader > Co-leader > Elder > Member)
+    - Implement role-specific permissions
+    - Create PromoteMember method with permission checks
+    - _Requirements: 3.1, 3.2_
+  - [ ] 3.2 Implement member approval system
+    - Create pending request queue for Closed clans
+    - Allow Leader/Co-leader to approve/reject requests
+    - Auto-expire requests after 7 days
+    - _Requirements: 3.3_
+  - [ ] 3.3 Implement member kick functionality
+    - Create KickMember method with confirmation dialog
+    - Restrict to Leader/Co-leader permissions
+    - Prevent kicking the Leader
+    - _Requirements: 3.4_
+  - [ ] 3.4 Implement leadership transfer
+    - Create TransferLeadership method
+    - Require confirmation from both parties
+    - Update roles immediately upon acceptance
+    - _Requirements: 3.5_
+  - [ ]* 3.5 Write unit tests for member management
+    - Test role promotion/demotion logic
+    - Test permission checks
+    - Test kick functionality
+    - Test leadership transfer
+    - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
+
+- [ ] 4. Create clan UI components
+  - [ ] 4.1 Create ClanWindow prefab
+    - Design main window with tab navigation (Chat, Members, Events, Fort, Settings)
+    - Implement swipe gestures for tab switching
+    - Add notification badge on clan icon
+    - _Requirements: 13.3_
+  - [ ] 4.2 Create ClanSearchPanel
+    - Design search interface with filter options
+    - Display clan list with: name, badge, member count, join mode, activity level
+    - Add "Create Clan" button
+    - Implement pagination (20 clans per page)
+    - _Requirements: 2.1, 2.2_
+  - [ ] 4.3 Create CreateClanDialog
+    - Add input fields for name, description, join mode
+    - Implement badge/emblem picker (50+ designs)
+    - Add activity level selector (Casual/Competitive)
+    - Add minimum level requirement slider (0-100)
+    - Add custom tags input (max 5 tags)
+    - Show creation cost (1000 gold)
+    - _Requirements: 1.1, 1.2, 1.3, 14.1, 14.2, 14.3, 14.4_
+  - [ ] 4.4 Create MemberListPanel
+    - Design scrollable member list (60px minimum height per item)
+    - Display: avatar, name, level, role, last active time
+    - Implement swipe gestures: view profile (right), kick/promote (left for leaders)
+    - Add sorting options: name, level, role, last active, donations, reputation
+    - Show online member count
+    - _Requirements: 8.2, 8.5, 13.1, 13.2_
+  - [ ] 4.5 Create MemberProfileDialog
+    - Display detailed member stats: join date, donations, event contributions, war participation
+    - Show reputation score and badges
+    - Add action buttons for leaders: promote, demote, kick
+    - _Requirements: 8.4_
+  - [ ] 4.6 Optimize UI for mobile
+    - Ensure all touch targets are minimum 48x48 pixels
+    - Position primary buttons within 120px from bottom edge
+    - Test one-handed operation
+    - Support portrait and landscape orientations
+    - _Requirements: 13.4, 13.5_
+
+- [ ] 5. Implement clan statistics and activity log
+  - [ ] 5.1 Create ClanStats tracking
+    - Track total members, average level, total donations
+    - Track war wins/losses, events completed, fort level
+    - Update stats in real-time
+    - _Requirements: 8.1_
+  - [ ] 5.2 Create activity log system
+    - Log events: joins, leaves, promotions, donations, war results
+    - Display recent 50 activities
+    - Add timestamp and actor information
+    - _Requirements: 8.3_
+  - [ ] 5.3 Create StatsPanel UI
+    - Display clan statistics in visual format
+    - Show activity log with icons and timestamps
+    - Add filter options for activity types
+    - _Requirements: 8.1, 8.3_
+
+## Phase 2: Donation System
+
+- [ ] 6. Implement donation request system
+  - [ ] 6.1 Create DonationManager
+    - Implement CreateRequest method (one active request per member)
+    - Set request expiration to 8 hours
+    - Track fulfilled quantity vs requested quantity
+    - _Requirements: 4.1, 4.2_
+  - [ ] 6.2 Implement donation functionality
+    - Create DonateToRequest method
+    - Enforce daily donation limit (5 donations per day)
+    - Reward donor with 5 gold coins and 1 XP
+    - Update request progress
+    - _Requirements: 4.3, 4.4_
+  - [ ] 6.3 Implement donation notifications
+    - Notify requester when request is fulfilled
+    - Notify requester when request expires
+    - Display donation feed in clan chat
+    - _Requirements: 4.5_
+  - [ ] 6.4 Create DonationPanel UI
+    - Display active donation requests in scrollable list
+    - Show requester name, item type, progress bar
+    - Add "Donate" button with remaining donations counter
+    - Show personal donation stats
+    - _Requirements: 4.1, 4.2, 4.3_
+  - [ ]* 6.5 Write unit tests for donation system
+    - Test request creation and expiration
+    - Test donation limits and cooldowns
+    - Test reward distribution
+    - Test notification triggers
+    - _Requirements: 4.1, 4.2, 4.3, 4.4_
+
+## Phase 3: Clan Events
+
+- [ ] 7. Implement clan event system
+  - [ ] 7.1 Create ClanEventManager
+    - Implement GetActiveEvent method
+    - Create ContributePoints method
+    - Track individual and total contributions
+    - _Requirements: 5.1, 5.2_
+  - [ ] 7.2 Implement milestone system
+    - Define milestones: Bronze, Silver, Gold, Platinum
+    - Set point requirements for each milestone
+    - Detect when milestones are reached
+    - _Requirements: 5.3_
+  - [ ] 7.3 Implement reward distribution
+    - Distribute rewards when milestone reached
+    - Require minimum 100 points contribution to receive rewards
+    - Track which members received rewards
+    - _Requirements: 5.4_
+  - [ ] 7.4 Create event leaderboard
+    - Track top 10 contributors
+    - Update leaderboard in real-time
+    - Display contributor name and points
+    - _Requirements: 5.5_
+  - [ ] 7.5 Create EventPanel UI
+    - Display event name, description, and timer
+    - Show progress bar with milestone markers
+    - Display leaderboard with top contributors
+    - Add "Contribute" button
+    - Show personal contribution
+    - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
+  - [ ]* 7.6 Write unit tests for event system
+    - Test point contribution logic
+    - Test milestone detection
+    - Test reward distribution rules
+    - Test leaderboard ranking
+    - _Requirements: 5.1, 5.2, 5.3, 5.4_
+
+## Phase 4: Clan Fort
+
+- [ ] 8. Implement clan fort system
+  - [ ] 8.1 Create ClanFortManager
+    - Implement GetFortStatus method
+    - Create ContributeResources method
+    - Track upgrade progress for 5 levels
+    - _Requirements: 6.1, 6.2_
+  - [ ] 8.2 Implement fort upgrade logic
+    - Define resource requirements for each level
+    - Aggregate contributions from all members
+    - Trigger upgrade when requirements met
+    - _Requirements: 6.1, 6.2_
+  - [ ] 8.3 Implement fort bonuses
+    - Define bonuses for each level (+5% gold, +10% XP, etc.)
+    - Apply bonuses to all clan members
+    - Track active bonuses
+    - _Requirements: 6.3_
+  - [ ] 8.4 Track member contributions
+    - Record each contribution with player ID, resource type, amount
+    - Display total contribution per member
+    - Show contribution history
+    - _Requirements: 6.4_
+  - [ ] 8.5 Create FortPanel UI
+    - Display fort level and visual representation
+    - Show upgrade progress bars for each resource type
+    - Display active bonuses
+    - Add "Contribute" button
+    - Show top contributors
+    - _Requirements: 6.1, 6.2, 6.3, 6.4_
+  - [ ]* 8.6 Write unit tests for fort system
+    - Test resource contribution tracking
+    - Test upgrade trigger logic
+    - Test bonus application
+    - Test contribution history
+    - _Requirements: 6.1, 6.2, 6.3, 6.4_
+
+## Phase 5: Clan Wars
+
+- [ ] 9. Implement clan war system
+  - [ ] 9.1 Create ClanWarManager
+    - Implement SearchOpponents method (±10 member count)
+    - Create InitiateWar method
+    - Create AcceptWarChallenge method
+    - _Requirements: 7.1, 7.2_
+  - [ ] 9.2 Implement war lifecycle
+    - Set war duration to 48 hours
+    - Track war status (Pending, Active, Completed)
+    - Handle war acceptance timeout (24 hours)
+    - _Requirements: 7.2, 7.3_
+  - [ ] 9.3 Implement war challenges
+    - Define challenge types (Win Matches, Collect Items, Complete Objectives)
+    - Assign point values to challenges
+    - Track challenge completion per player
+    - _Requirements: 7.3_
+  - [ ] 9.4 Implement war scoring
+    - Aggregate points from all participants
+    - Update scores in real-time
+    - Determine winner when war ends
+    - _Requirements: 7.3, 7.4_
+  - [ ] 9.5 Implement war rewards
+    - Distribute 1000 gems per member for winner
+    - Distribute 500 gems per member for loser
+    - Track war win/loss record
+    - _Requirements: 7.5_
+  - [ ] 9.6 Create WarPanel UI
+    - Display opponent clan information
+    - Show war timer and status
+    - Display score comparison
+    - List available challenges
+    - Show participant leaderboard
+    - _Requirements: 7.1, 7.2, 7.3, 7.4_
+  - [ ] 9.7 Implement war opt-out
+    - Allow members to opt-out without penalty
+    - Display opt-out status
+    - Exclude opted-out members from war
+    - _Requirements: 9.5_
+  - [ ]* 9.8 Write unit tests for war system
+    - Test matchmaking algorithm
+    - Test war lifecycle state transitions
+    - Test scoring calculations
+    - Test reward distribution
+    - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
+
+## Phase 6: Notification System
+
+- [ ] 10. Implement clan notification system
+  - [ ] 10.1 Create NotificationManager
+    - Implement SendNotification method
+    - Support notification types: donation, event, war, member activity, role promotion
+    - Track unread notification count
+    - _Requirements: 11.1_
+  - [ ] 10.2 Implement notification preferences
+    - Create settings UI for each notification type
+    - Allow enable/disable per notification type
+    - Persist preferences across sessions
+    - _Requirements: 11.2_
+  - [ ] 10.3 Implement push notifications
+    - Integrate with platform push notification service
+    - Send push for critical events (war started, event milestone)
+    - Respect user preferences
+    - _Requirements: 11.1_
+  - [ ] 10.4 Implement in-game notifications
+    - Display banner notification for events
+    - Update notification badge on clan icon
+    - Show notification history (7 days)
+    - _Requirements: 11.3, 11.4_
+  - [ ] 10.5 Create NotificationPanel UI
+    - Display notification list with icons and timestamps
+    - Mark notifications as read on view
+    - Add "Clear All" button
+    - _Requirements: 11.5_
+  - [ ]* 10.6 Write unit tests for notification system
+    - Test notification creation and delivery
+    - Test preference filtering
+    - Test badge counter updates
+    - Test notification history
+    - _Requirements: 11.1, 11.2, 11.3, 11.4_
+
+## Phase 7: Inactive Member Management
+
+- [ ] 11. Implement inactive member management
+  - [ ] 11.1 Create activity tracking
+    - Track last active time for each member
+    - Update on any clan interaction
+    - Display in member list
+    - _Requirements: 10.1_
+  - [ ] 11.2 Create inactive member filter
+    - Add filter options: 7, 14, 30 days inactive
+    - Highlight inactive members in list
+    - Show inactive count
+    - _Requirements: 10.2_
+  - [ ] 11.3 Implement wake-up notification
+    - Create "Send Wake-up" button for leaders
+    - Send notification to inactive member
+    - Track when wake-up was sent
+    - _Requirements: 10.3_
+  - [ ] 11.4 Implement bulk kick functionality
+    - Add "Bulk Kick" button for 30+ days inactive
+    - Show confirmation dialog with member list
+    - Execute kick for all selected members
+    - _Requirements: 10.4_
+  - [ ] 11.5 Implement auto-warning system
+    - Send warning notification at 14 days inactive
+    - Display warning status in member list
+    - _Requirements: 10.5_
+  - [ ]* 11.6 Write unit tests for inactive management
+    - Test activity tracking
+    - Test filter logic
+    - Test wake-up notification
+    - Test bulk kick functionality
+    - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5_
+
+## Phase 8: Progressive Feature Unlock & Tutorial
+
+- [ ] 12. Implement progressive feature unlock system
+  - [ ] 12.1 Create feature unlock manager
+    - Track player level and clan membership duration
+    - Track donation count and event participation
+    - Unlock features based on criteria
+    - _Requirements: 15.1, 15.2, 15.3, 15.4, 15.5_
+  - [ ] 12.2 Implement unlock criteria
+    - Clan System: Level 20
+    - Clan Events: 3 days membership + 5 donations
+    - Clan Fort: 2 events participated
+    - Clan Wars: Fort Level 2
+    - _Requirements: 15.1, 15.2, 15.3, 15.4, 15.5_
+  - [ ] 12.3 Create tutorial system
+    - Design tutorial for first-time clan join
+    - Show guided tour of Chat, Donation, Member List
+    - Add tooltips for new features as they unlock
+    - _Requirements: 15.1, 15.2_
+  - [ ] 12.4 Create unlock notification UI
+    - Display celebration animation when feature unlocks
+    - Show feature description and benefits
+    - Add "Try Now" button
+    - _Requirements: 15.3, 15.4, 15.5_
+  - [ ]* 12.5 Write unit tests for unlock system
+    - Test unlock criteria evaluation
+    - Test feature gating
+    - Test tutorial flow
+    - _Requirements: 15.1, 15.2, 15.3, 15.4, 15.5_
+
+## Phase 9: Server Implementation
+
+- [ ] 13. Implement server-side services (if implementing server)
+  - [ ] 13.1 Set up REST API infrastructure
+    - Initialize web server (ASP.NET Core or Node.js/Express)
+    - Set up routing and middleware
+    - Implement authentication and authorization
+    - _Requirements: All_
+  - [ ] 13.2 Implement ClanService
+    - Create CRUD operations for clans
+    - Implement search with filtering
+    - Implement member management
+    - Validate permissions for all operations
+    - _Requirements: 1.1, 2.1, 3.1_
+  - [ ] 13.3 Implement DonationService
+    - Create donation request lifecycle
+    - Enforce donation limits and cooldowns
+    - Implement reward distribution
+    - _Requirements: 4.1, 4.2, 4.3, 4.4_
+  - [ ] 13.4 Implement EventService
+    - Create event lifecycle management
+    - Track contributions and milestones
+    - Distribute rewards
+    - Generate leaderboards
+    - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
+  - [ ] 13.5 Implement FortService
+    - Track resource contributions
+    - Handle fort upgrades
+    - Apply bonuses to members
+    - _Requirements: 6.1, 6.2, 6.3, 6.4_
+  - [ ] 13.6 Implement WarService
+    - Implement matchmaking algorithm
+    - Manage war lifecycle
+    - Track scores and challenges
+    - Distribute rewards
+    - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
+  - [ ] 13.7 Implement NotificationService
+    - Send notifications via WebSocket
+    - Integrate push notification service
+    - Track notification history
+    - _Requirements: 11.1, 11.2, 11.3, 11.4_
+  - [ ] 13.8 Set up database schema
+    - Design tables/collections for all data models
+    - Create indexes for performance
+    - Set up relationships and constraints
+    - _Requirements: All_
+  - [ ] 13.9 Implement background jobs
+    - Create job for request expiration
+    - Create job for event end and reward distribution
+    - Create job for war end and reward distribution
+    - Create job for inactive member warnings
+    - _Requirements: 4.2, 5.4, 7.5, 10.5_
+  - [ ]* 13.10 Write integration tests for server
+    - Test end-to-end clan creation and joining
+    - Test donation request lifecycle
+    - Test event participation and rewards
+    - Test fort upgrade process
+    - Test war lifecycle
+    - _Requirements: All_
+
+## Phase 10: Performance Optimization & Polish
+
+- [ ] 14. Optimize performance
+  - [ ] 14.1 Implement client-side caching
+    - Cache clan data locally
+    - Cache member list with TTL
+    - Cache event and fort data
+    - Implement cache invalidation strategy
+    - _Requirements: All_
+  - [ ] 14.2 Implement lazy loading
+    - Load member details on-demand
+    - Paginate member list (20 per page)
+    - Lazy load activity log
+    - _Requirements: 8.2_
+  - [ ] 14.3 Optimize asset loading
+    - Bundle badge/emblem assets
+    - Use Addressables for on-demand loading
+    - Implement asset caching
+    - _Requirements: 14.1_
+  - [ ] 14.4 Optimize network calls
+    - Batch API requests where possible
+    - Implement request debouncing
+    - Use delta updates for member list
+    - _Requirements: All_
+  - [ ]* 14.5 Perform performance testing
+    - Test with 1000 concurrent clans
+    - Test member list with 50 members
+    - Test event with 100 contributors
+    - Measure API response times
+    - _Requirements: All_
+
+- [ ] 15. Integration and polish
+  - [ ] 15.1 Wire all components together
+    - Connect ClanManager to all sub-managers
+    - Connect UI managers to core managers
+    - Set up event subscriptions
+    - _Requirements: All_
+  - [ ] 15.2 Create configuration system
+    - Create ClanConfig ScriptableObject
+    - Define configurable values (creation cost, member limit, donation limit, etc.)
+    - Load badge/emblem library from config
+    - _Requirements: 1.2, 1.5, 4.3, 14.1_
+  - [ ] 15.3 Implement error handling
+    - Add error codes for all failure scenarios
+    - Display user-friendly error messages
+    - Implement retry logic for network failures
+    - _Requirements: All_
+  - [ ] 15.4 Create demo scene
+    - Set up test scene with clan UI
+    - Add test buttons for different scenarios
+    - Create mock server for testing (if needed)
+    - _Requirements: All_
+  - [ ] 15.5 Add analytics tracking
+    - Track clan creation and joins
+    - Track donation activity
+    - Track event participation
+    - Track war participation
+    - _Requirements: All_
+  - [ ]* 15.6 Perform end-to-end testing
+    - Test all user flows (create, join, donate, event, fort, war)
+    - Test on different screen sizes and resolutions
+    - Test progressive unlock flow
+    - Test error scenarios
+    - Test with multiple concurrent users
+    - _Requirements: All_
+
+## Phase 11: Security & Anti-Abuse
+
+- [ ] 16. Implement security measures
+  - [ ] 16.1 Add input validation
+    - Validate clan name, description, tags
+    - Validate resource amounts and point contributions
+    - Prevent negative values and overflow
+    - _Requirements: 1.1, 1.3, 6.2, 7.3_
+  - [ ] 16.2 Implement rate limiting
+    - Limit API calls to 10 per minute per user
+    - Limit clan creation to once per 24 hours
+    - Limit clan joins to once per 24 hours
+    - _Requirements: 12.3_
+  - [ ] 16.3 Add anti-abuse detection
+    - Detect donation farming patterns
+    - Detect coordinated war manipulation
+    - Flag suspicious activity for review
+    - _Requirements: 4.3, 7.4_
+  - [ ] 16.4 Implement authorization checks
+    - Validate permissions on every action
+    - Prevent self-promotion and self-kicking
+    - Verify clan membership before operations
+    - _Requirements: 3.1, 3.2, 3.4_
+  - [ ]* 16.5 Perform security testing
+    - Test authorization bypass attempts
+    - Test input validation with malicious inputs
+    - Test rate limiting enforcement
+    - Test anti-abuse detection
+    - _Requirements: All_
