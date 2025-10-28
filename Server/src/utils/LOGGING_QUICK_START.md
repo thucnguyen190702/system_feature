@@ -1,28 +1,28 @@
-# Logging and Monitoring Quick Start
+# Logging và Monitoring - Hướng dẫn Khởi động Nhanh - Hướng dẫn Sử dụng
 
-## 🚀 Getting Started in 2 Minutes
+## 🚀 Bắt đầu trong 2 Phút
 
-### 1. Import Logger and Metrics
+### 1. Import Logger và Metrics
 
 ```typescript
 import { logger } from '../config/logger';
 import { metrics, MetricNames } from '../utils/metrics';
 ```
 
-### 2. Add Logging to Your Service
+### 2. Thêm Logging vào Service của bạn
 
 ```typescript
 export class MyService {
     async myMethod(userId: string): Promise<void> {
-        logger.info('Starting operation', { userId });
+        logger.info('Bắt đầu thao tác', { userId });
         
         try {
-            // Your business logic here
+            // Business logic của bạn ở đây
             
-            logger.info('Operation completed', { userId });
+            logger.info('Thao tác hoàn thành', { userId });
         } catch (error) {
-            logger.error('Operation failed', {
-                error: error instanceof Error ? error.message : 'Unknown error',
+            logger.error('Thao tác thất bại', {
+                error: error instanceof Error ? error.message : 'Lỗi không xác định',
                 stack: error instanceof Error ? error.stack : undefined,
                 userId
             });
@@ -32,39 +32,39 @@ export class MyService {
 }
 ```
 
-### 3. Track Metrics
+### 3. Theo dõi Metrics
 
 ```typescript
-// Increment a counter
+// Tăng counter
 metrics.incrementCounter(MetricNames.FRIEND_REQUESTS_SENT);
 
-// Record a timing
+// Ghi lại timing
 const startTime = Date.now();
-// ... do work ...
+// ... thực hiện công việc ...
 const duration = Date.now() - startTime;
 metrics.recordHistogram(MetricNames.API_RESPONSE_TIME, duration);
 
-// Record a gauge (current value)
+// Ghi lại gauge (giá trị hiện tại)
 metrics.recordGauge(MetricNames.ACCOUNTS_ONLINE, 150);
 ```
 
-## 📊 View Logs and Metrics
+## 📊 Xem Logs và Metrics
 
-### View Logs
+### Xem Logs
 ```bash
-# All logs
+# Tất cả logs
 tail -f logs/combined.log
 
-# Errors only
+# Chỉ errors
 tail -f logs/error.log
 ```
 
-### View Metrics
+### Xem Metrics
 ```bash
-# Via API
+# Qua API
 curl http://localhost:3000/metrics
 
-# Or open in browser
+# Hoặc mở trong browser
 http://localhost:3000/metrics
 ```
 

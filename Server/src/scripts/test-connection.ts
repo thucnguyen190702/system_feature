@@ -4,8 +4,8 @@ async function testConnection() {
     try {
         console.log('🔍 Testing database connection...');
         console.log(`   Host: ${process.env.DB_HOST || 'localhost'}`);
-        console.log(`   Port: ${process.env.DB_PORT || '5432'}`);
-        console.log(`   Database: ${process.env.DB_NAME || 'friend_system_db'}`);
+        console.log(`   Port: ${process.env.DB_PORT || '5126'}`);
+        console.log(`   Database: ${process.env.DB_NAME || 'system_db'}`);
         console.log(`   User: ${process.env.DB_USER || 'postgres'}`);
         
         await AppDataSource.initialize();

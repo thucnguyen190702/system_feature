@@ -1,102 +1,102 @@
-# Friend System Server
+# Hệ thống Bạn bè Server - Hướng dẫn Sử dụng
 
-Node.js TypeScript server for the Friend System with PostgreSQL database.
+Node.js TypeScript server cho Hệ thống Bạn bè với cơ sở dữ liệu PostgreSQL.
 
-## Prerequisites
+## Yêu cầu Tiên quyết
 
 - Node.js 18+ LTS
 - PostgreSQL 14+
-- npm or yarn
+- npm hoặc yarn
 
-## Installation
+## Cài đặt
 
-1. Install dependencies:
+1. Cài đặt dependencies:
 ```bash
 npm install
 ```
 
-2. Configure environment variables:
+2. Cấu hình biến môi trường:
 ```bash
 cp .env.example .env
-# Edit .env with your database credentials
+# Chỉnh sửa .env với thông tin database của bạn
 ```
 
-3. Create PostgreSQL database:
+3. Tạo PostgreSQL database:
 ```sql
 CREATE DATABASE friend_system_db;
 ```
 
-4. Run database migrations:
+4. Chạy database migrations:
 ```bash
 npm run migration:run
 ```
 
-## Development
+## Phát triển
 
-Start the development server:
+Khởi động development server:
 ```bash
 npm run dev
 ```
 
-The server will run on `http://localhost:3000`
+Server sẽ chạy tại `http://localhost:3000`
 
 ## Build
 
-Build for production:
+Build cho production:
 ```bash
 npm run build
 ```
 
 ## Scripts
 
-- `npm run dev` - Start development server with hot reload
-- `npm run build` - Build TypeScript to JavaScript
-- `npm start` - Start production server
-- `npm run migration:generate` - Generate new migration
-- `npm run migration:run` - Run pending migrations
-- `npm run migration:revert` - Revert last migration
+- `npm run dev` - Khởi động development server với hot reload
+- `npm run build` - Build TypeScript thành JavaScript
+- `npm start` - Khởi động production server
+- `npm run migration:generate` - Tạo migration mới
+- `npm run migration:run` - Chạy các migration đang chờ
+- `npm run migration:revert` - Hoàn tác migration cuối cùng
 
-## Project Structure
+## Cấu trúc Dự án
 
 ```
 Server/
 ├── src/
-│   ├── config/          # Configuration files
-│   │   ├── database.ts  # Database connection
+│   ├── config/          # File cấu hình
+│   │   ├── database.ts  # Kết nối database
 │   │   └── logger.ts    # Winston logger
 │   ├── entities/        # TypeORM entities
 │   │   ├── InGameAccount.ts
 │   │   ├── FriendRequest.ts
 │   │   └── FriendRelationship.ts
-│   ├── services/        # Business logic (to be added)
-│   ├── controllers/     # API controllers (to be added)
-│   ├── middleware/      # Express middleware (to be added)
-│   ├── routes/          # API routes (to be added)
-│   ├── migrations/      # Database migrations (to be added)
-│   └── index.ts         # Application entry point
+│   ├── services/        # Business logic (sẽ được thêm)
+│   ├── controllers/     # API controllers (sẽ được thêm)
+│   ├── middleware/      # Express middleware (sẽ được thêm)
+│   ├── routes/          # API routes (sẽ được thêm)
+│   ├── migrations/      # Database migrations (sẽ được thêm)
+│   └── index.ts         # Entry point ứng dụng
 ├── logs/                # Application logs
-├── .env                 # Environment variables
-├── .env.example         # Environment variables template
+├── .env                 # Biến môi trường
+├── .env.example         # Template biến môi trường
 ├── package.json         # Dependencies
-└── tsconfig.json        # TypeScript configuration
+└── tsconfig.json        # Cấu hình TypeScript
 ```
 
 ## API Endpoints
 
 Health check:
-- `GET /health` - Server health status
+- `GET /health` - Trạng thái sức khỏe server
 
-More endpoints will be added in subsequent tasks.
+Thêm endpoints sẽ được thêm trong các task tiếp theo.
 
-## Environment Variables
+## Biến Môi trường
 
-See `.env.example` for all available configuration options.
+Xem `.env.example` để biết tất cả các tùy chọn cấu hình có sẵn.
 
 ## Database Schema
 
-The database uses three main tables:
-- `accounts` - User accounts
-- `friend_requests` - Friend request records
-- `friend_relationships` - Friend connections
+Database sử dụng ba bảng chính:
+- `accounts` - Tài khoản người dùng
+- `friend_requests` - Bản ghi lời mời kết bạn
+- `friend_relationships` - Kết nối bạn bè
 
-Detailed schema will be created in the next task (Database Schema implementation).
+Schema chi tiết sẽ được tạo trong task tiếp theo (triển khai Database Schema).

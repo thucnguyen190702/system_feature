@@ -1,21 +1,21 @@
-# Database Migrations
+# Database Migrations - Hướng dẫn Sử dụng
 
-This directory contains TypeORM migration files for the Friend System database schema.
+Thư mục này chứa các TypeORM migration files cho Friend System database schema.
 
 ## Migration Files
 
 ### 1700000001-CreateAccountsTable.ts
-Creates the `accounts` table with all necessary columns and indexes.
+Tạo bảng `accounts` với tất cả columns và indexes cần thiết.
 
-**Tables Created:**
+**Bảng Được tạo:**
 - `accounts`
 
 **Indexes:**
-- `idx_accounts_username` - Fast username lookups
-- `idx_accounts_status` - Filter by account status
+- `idx_accounts_username` - Username lookups nhanh
+- `idx_accounts_status` - Filter theo account status
 - `idx_accounts_is_online` - Query online users
 
-**Requirements Addressed:** 1.1, 1.2
+**Yêu cầu Được giải quyết:** 1.1, 1.2
 
 ---
 
@@ -59,49 +59,49 @@ Creates the `friend_relationships` table with bidirectional friendship support.
 
 ---
 
-## Running Migrations
+## Chạy Migrations
 
-### Apply All Pending Migrations
+### Áp dụng Tất cả Pending Migrations
 ```bash
 npm run migration:run
 ```
 
-### Revert Last Migration
+### Hoàn tác Migration Cuối cùng
 ```bash
 npm run migration:revert
 ```
 
-### Verify Schema
+### Xác minh Schema
 ```bash
 npm run schema:verify
 ```
 
-## Migration Naming Convention
+## Quy ước Đặt tên Migration
 
-Migrations follow the pattern: `{timestamp}-{DescriptiveName}.ts`
+Migrations tuân theo pattern: `{timestamp}-{DescriptiveName}.ts`
 
-Example: `1700000001-CreateAccountsTable.ts`
+Ví dụ: `1700000001-CreateAccountsTable.ts`
 
-## Creating New Migrations
+## Tạo Migrations Mới
 
-To generate a new migration based on entity changes:
+Để tạo migration mới dựa trên entity changes:
 ```bash
 npm run migration:generate -- src/migrations/MigrationName
 ```
 
-To create an empty migration:
+Để tạo migration rỗng:
 ```bash
 npm run typeorm -- migration:create src/migrations/MigrationName
 ```
 
-## Best Practices
+## Thực hành Tốt nhất
 
-1. **Never modify existing migrations** that have been run in production
-2. **Always test migrations** in development before deploying
-3. **Create rollback logic** in the `down()` method
-4. **Use transactions** for complex migrations
-5. **Add indexes** for frequently queried columns
-6. **Document breaking changes** in migration comments
+1. **Không bao giờ sửa đổi migrations hiện có** đã chạy trong production
+2. **Luôn test migrations** trong development trước khi deploy
+3. **Tạo rollback logic** trong method `down()`
+4. **Sử dụng transactions** cho migrations phức tạp
+5. **Thêm indexes** cho các columns được query thường xuyên
+6. **Tài liệu hóa breaking changes** trong migration comments
 
 ## Troubleshooting
 

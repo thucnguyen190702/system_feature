@@ -1,17 +1,17 @@
-# Friend System API Documentation
+# Tài liệu API Hệ thống Bạn bè - Hướng dẫn Sử dụng
 
-## Overview
+## Tổng quan
 
-This document provides comprehensive documentation for the Friend System REST API. The API enables players to manage in-game accounts, friend relationships, friend requests, and search functionality.
+Tài liệu này cung cấp hướng dẫn toàn diện cho Friend System REST API. API cho phép người chơi quản lý tài khoản trong game, mối quan hệ bạn bè, lời mời kết bạn, và chức năng tìm kiếm.
 
 **Base URL**: `http://localhost:3000/api`
 
-**Authentication**: All protected endpoints require a JWT token in the Authorization header:
+**Xác thực**: Tất cả endpoints được bảo vệ yêu cầu JWT token trong Authorization header:
 ```
 Authorization: Bearer <your_jwt_token>
 ```
 
-## Table of Contents
+## Mục lục
 
 1. [Account Endpoints](#account-endpoints)
 2. [Friend Endpoints](#friend-endpoints)
@@ -25,13 +25,13 @@ Authorization: Bearer <your_jwt_token>
 
 ## Account Endpoints
 
-### Create Account
+### Tạo Tài khoản
 
-Creates a new in-game account.
+Tạo một tài khoản trong game mới.
 
 **Endpoint**: `POST /api/accounts`
 
-**Authentication**: Not required
+**Xác thực**: Không yêu cầu
 
 **Request Body**:
 ```json
@@ -59,8 +59,8 @@ Creates a new in-game account.
 ```
 
 **Error Responses**:
-- `400 Bad Request`: Username already exists or invalid data
-- `500 Internal Server Error`: Server error
+- `400 Bad Request`: Username đã tồn tại hoặc dữ liệu không hợp lệ
+- `500 Internal Server Error`: Lỗi server
 
 ---
 

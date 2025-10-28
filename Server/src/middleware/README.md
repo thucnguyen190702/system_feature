@@ -1,15 +1,15 @@
-# Authentication Middleware
+# Authentication Middleware - Hướng dẫn Sử dụng
 
-This directory contains authentication middleware for the Friend System API.
+Thư mục này chứa authentication middleware cho Friend System API.
 
-## Overview
+## Tổng quan
 
-The authentication system uses JWT (JSON Web Tokens) for secure authentication. Tokens are valid for 7 days by default.
+Hệ thống xác thực sử dụng JWT (JSON Web Tokens) để xác thực an toàn. Tokens có hiệu lực 7 ngày theo mặc định.
 
 ## Files
 
-- `auth.ts` - Authentication middleware implementation
-- `index.ts` - Exports for easy importing
+- `auth.ts` - Triển khai authentication middleware
+- `index.ts` - Exports để import dễ dàng
 
 ## Usage
 

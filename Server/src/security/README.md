@@ -1,72 +1,72 @@
-# Security Features Documentation
+# Tài liệu Security Features - Hướng dẫn Sử dụng
 
-This document describes the security features implemented in the Friend System server.
+Tài liệu này mô tả các security features được triển khai trong Friend System server.
 
-## Overview
+## Tổng quan
 
-The security implementation covers three main areas:
-1. **Data Encryption** - Protecting sensitive data at rest and in transit
-2. **Rate Limiting** - Preventing spam and abuse
-3. **Block List** - Allowing users to block unwanted interactions
+Triển khai security bao gồm ba lĩnh vực chính:
+1. **Data Encryption** - Bảo vệ sensitive data at rest và in transit
+2. **Rate Limiting** - Ngăn chặn spam và abuse
+3. **Block List** - Cho phép users chặn các tương tác không mong muốn
 
-## 1. Data Encryption (Requirements: 5.1, 5.4)
+## 1. Data Encryption (Yêu cầu: 5.1, 5.4)
 
 ### Encryption Utility (`utils/encryption.ts`)
 
-Provides AES-256-GCM encryption for sensitive data with the following features:
+Cung cấp AES-256-GCM encryption cho sensitive data với các tính năng sau:
 
 - **Algorithm**: AES-256-GCM (Galois/Counter Mode)
-- **Key Derivation**: PBKDF2 with 100,000 iterations
-- **Authentication**: Built-in authentication tags prevent tampering
-- **Random IVs**: Each encryption uses a unique initialization vector
+- **Key Derivation**: PBKDF2 với 100,000 iterations
+- **Authentication**: Built-in authentication tags ngăn chặn tampering
+- **Random IVs**: Mỗi encryption sử dụng unique initialization vector
 
-#### Usage Example
+#### Ví dụ Sử dụng
 
 ```typescript
 import { encrypt, decrypt } from '../utils/encryption';
 
 // Encrypt sensitive data
 const encrypted = encrypt('sensitive-data');
-// Returns: "salt:iv:authTag:encryptedData" (all base64 encoded)
+// Trả về: "salt:iv:authTag:encryptedData" (tất cả base64 encoded)
 
 // Decrypt data
 const decrypted = decrypt(encrypted);
-// Returns: "sensitive-data"
+// Trả về: "sensitive-data"
 ```
 
-#### Configuration
+#### Cấu hình
 
-Add to `.env`:
+Thêm vào `.env`:
 ```
 ENCRYPTION_SECRET=your_encryption_secret_key_here_change_in_production_min_32_chars
 ```
 
-**Important**: The encryption secret must be at least 32 characters long and should be kept secure.
+**Quan trọng**: Encryption secret phải có ít nhất 32 ký tự và nên được giữ an toàn.
 
 ### HTTPS Enforcement (`middleware/https.ts`)
 
-Ensures all API calls use HTTPS in production:
+Đảm bảo tất cả API calls sử dụng HTTPS trong production:
 
 ```typescript
 import { enforceHttps, securityHeaders } from '../middleware/https';
 
-// Apply to all routes
+// Áp dụng cho tất cả routes
 app.use(enforceHttps);
 app.use(securityHeaders);
 ```
 
-**Security Headers Added**:
-- `X-Frame-Options: DENY` - Prevents clickjacking
-- `X-Content-Type-Options: nosniff` - Prevents MIME sniffing
-- `X-XSS-Protection: 1; mode=block` - Enables XSS protection
-- `Strict-Transport-Security` - Forces HTTPS (production only)
-- `Content-Security-Policy` - Restricts resource loading
+**Security Headers Được thêm**:
+- `X-Frame-Options: DENY` - Ngăn chặn clickjacking
+- `X-Content-Type-Options: nosniff` - Ngăn chặn MIME sniffing
+- `X-XSS-Protection: 1; mode=block` - Bật XSS protection
+- `Strict-Transport-Security` - Buộc HTTPS (chỉ production)
+- `Content-Security-Policy` - Hạn chế resource loading
 
-## 2. Rate Limiting (Requirements: 5.2)
+## 2. Rate Limiting (Yêu cầu: 5.2)
 
 ### Rate Limiter Middleware (`middleware/rateLimit.ts`)
 
-Implements flexible rate limiting with Redis support and in-memory fallback.
+Triển khai flexible rate limiting với Redis support và in-memory fallback.
 
 #### Available Rate Limiters
 

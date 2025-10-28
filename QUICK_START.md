@@ -1,98 +1,98 @@
-# Friend System - Quick Start Guide
+# Hệ thống Bạn bè - Hướng dẫn Khởi động Nhanh
 
-Get the Friend System up and running in minutes!
+Khởi động Hệ thống Bạn bè chỉ trong vài phút!
 
-## 🚀 Quick Start (5 Minutes)
+## 🚀 Khởi động Nhanh (5 Phút)
 
-### Prerequisites
+### Yêu cầu Tiên quyết
 - Node.js 18+
 - PostgreSQL 14+
-- Docker (optional, but recommended)
+- Docker (tùy chọn, nhưng được khuyến nghị)
 
-### Option 1: Docker (Recommended)
+### Tùy chọn 1: Docker (Khuyến nghị)
 
 ```bash
-# 1. Navigate to server directory
+# 1. Chuyển đến thư mục server
 cd Server
 
-# 2. Setup environment
+# 2. Thiết lập môi trường
 npm run setup:env
 
-# 3. Deploy everything
+# 3. Deploy tất cả
 npm run deploy
 
-# 4. Verify it's running
+# 4. Kiểm tra hoạt động
 curl http://localhost:3000/health
 ```
 
-**Done!** The system is now running at `http://localhost:3000`
+**Hoàn thành!** Hệ thống hiện đang chạy tại `http://localhost:3000`
 
-### Option 2: Manual Setup
+### Tùy chọn 2: Thiết lập Thủ công
 
 ```bash
-# 1. Navigate to server directory
+# 1. Chuyển đến thư mục server
 cd Server
 
-# 2. Install dependencies
+# 2. Cài đặt dependencies
 npm install
 
-# 3. Setup environment
+# 3. Thiết lập môi trường
 npm run setup:env
 
-# 4. Run migrations
+# 4. Chạy migrations
 npm run migration:run
 
-# 5. Start the server
+# 5. Khởi động server
 npm run dev
 ```
 
 ---
 
-## 📚 Documentation
+## 📚 Tài liệu
 
-### For Developers
-- **[API Documentation](Server/API_DOCUMENTATION.md)** - Complete API reference
-- **[Deployment Guide](Server/DEPLOYMENT.md)** - Detailed deployment instructions
-- **[Setup Guide](Server/SETUP.md)** - Development environment setup
-- **[Migration Guide](Server/MIGRATION_GUIDE.md)** - Database migration instructions
+### Dành cho Developers
+- **[Tài liệu API](Server/API_DOCUMENTATION.md)** - Tham khảo API đầy đủ
+- **[Hướng dẫn Deployment](Server/DEPLOYMENT.md)** - Hướng dẫn deployment chi tiết
+- **[Hướng dẫn Setup](Server/SETUP.md)** - Thiết lập môi trường phát triển
+- **[Hướng dẫn Migration](Server/MIGRATION_GUIDE.md)** - Hướng dẫn database migration
 
-### For End Users
-- **[User Guide](USER_GUIDE.md)** - How to use the Friend System
-- **[Unity Guide](Client/Assets/Scripts/FriendSystem/USER_GUIDE_UNITY.md)** - Unity client instructions
+### Dành cho Người dùng Cuối
+- **[Hướng dẫn Người dùng](USER_GUIDE.md)** - Cách sử dụng Hệ thống Bạn bè
+- **[Hướng dẫn Unity](Client/Assets/Scripts/FriendSystem/USER_GUIDE_UNITY.md)** - Hướng dẫn Unity client
 
-### For System Administrators
-- **[Deployment Guide](Server/DEPLOYMENT.md)** - Production deployment
-- **[Monitoring Guide](Server/src/utils/LOGGING_MONITORING_README.md)** - Logging and monitoring
+### Dành cho Quản trị Hệ thống
+- **[Hướng dẫn Deployment](Server/DEPLOYMENT.md)** - Production deployment
+- **[Hướng dẫn Monitoring](Server/src/utils/LOGGING_MONITORING_README.md)** - Logging và monitoring
 
 ---
 
-## 🎯 Common Tasks
+## 🎯 Các Tác vụ Thường dùng
 
-### Start Development Server
+### Khởi động Development Server
 ```bash
 cd Server
 npm run dev
 ```
 
-### Run Tests
+### Chạy Tests
 ```bash
 cd Server
 npm test
 ```
 
-### Deploy to Production
+### Deploy lên Production
 ```bash
 cd Server
 npm run deploy
 ```
 
-### Manage Database Migrations
+### Quản lý Database Migrations
 ```bash
 cd Server
 npm run migrate
 ```
 
-### View Logs
+### Xem Logs
 ```bash
 # Docker
 docker-compose logs -f app
@@ -103,11 +103,11 @@ tail -f Server/logs/combined.log
 
 ---
 
-## 🔧 Configuration
+## 🔧 Cấu hình
 
-### Environment Variables
+### Biến Môi trường
 
-Key variables in `.env`:
+Các biến quan trọng trong `.env`:
 
 ```env
 # Server
@@ -128,73 +128,73 @@ JWT_SECRET=your_secret_key
 FRIEND_REQUEST_DAILY_LIMIT=10
 ```
 
-See `.env.example` for all available options.
+Xem `.env.example` để biết tất cả các tùy chọn có sẵn.
 
 ---
 
 ## 📖 API Endpoints
 
-### Account Management
-- `POST /api/accounts` - Create account
-- `GET /api/accounts/:id` - Get account
-- `PUT /api/accounts/:id` - Update account
+### Quản lý Tài khoản
+- `POST /api/accounts` - Tạo tài khoản
+- `GET /api/accounts/:id` - Lấy thông tin tài khoản
+- `PUT /api/accounts/:id` - Cập nhật tài khoản
 
-### Friend Management
-- `GET /api/friends/:accountId` - Get friend list
-- `DELETE /api/friends/:friendId` - Remove friend
-- `POST /api/friends/status` - Update online status
+### Quản lý Bạn bè
+- `GET /api/friends/:accountId` - Lấy danh sách bạn bè
+- `DELETE /api/friends/:friendId` - Xóa bạn bè
+- `POST /api/friends/status` - Cập nhật trạng thái online
 
-### Friend Requests
-- `POST /api/friend-requests` - Send request
-- `GET /api/friend-requests/:accountId/pending` - Get pending
-- `POST /api/friend-requests/:id/accept` - Accept request
+### Lời mời Kết bạn
+- `POST /api/friend-requests` - Gửi lời mời
+- `GET /api/friend-requests/:accountId/pending` - Lấy lời mời đang chờ
+- `POST /api/friend-requests/:id/accept` - Chấp nhận lời mời
 
-### Search
-- `GET /api/search/username?q=query` - Search by username
-- `GET /api/search/id/:accountId` - Search by ID
+### Tìm kiếm
+- `GET /api/search/username?q=query` - Tìm kiếm theo username
+- `GET /api/search/id/:accountId` - Tìm kiếm theo ID
 
-See [API Documentation](Server/API_DOCUMENTATION.md) for complete details.
+Xem [Tài liệu API](Server/API_DOCUMENTATION.md) để biết chi tiết đầy đủ.
 
 ---
 
-## 🐛 Troubleshooting
+## 🐛 Xử lý Sự cố
 
-### Server Won't Start
+### Server Không Khởi động
 ```bash
-# Check logs
+# Kiểm tra logs
 docker-compose logs app
 
-# Verify database connection
+# Kiểm tra kết nối database
 npm run db:test
 
-# Check environment variables
+# Kiểm tra biến môi trường
 cat .env
 ```
 
-### Database Connection Failed
+### Kết nối Database Thất bại
 ```bash
 # Test PostgreSQL
 psql -h localhost -U postgres -d friend_system
 
-# Check if PostgreSQL is running
+# Kiểm tra PostgreSQL có đang chạy không
 docker-compose ps postgres
 ```
 
-### Migration Errors
+### Lỗi Migration
 ```bash
-# Check migration status
+# Kiểm tra trạng thái migration
 npm run migration:show
 
-# Revert and retry
+# Revert và thử lại
 npm run migration:revert
 npm run migration:run
 ```
 
-See [Deployment Guide](Server/DEPLOYMENT.md) for more troubleshooting.
+Xem [Hướng dẫn Deployment](Server/DEPLOYMENT.md) để biết thêm cách xử lý sự cố.
 
 ---
 
-## 🏗️ Project Structure
+## 🏗️ Cấu trúc Dự án
 
 ```
 Friend-System/
@@ -213,33 +213,33 @@ Friend-System/
 │
 ├── Client/                         # Unity client
 │   └── Assets/Scripts/FriendSystem/
-│       ├── Core/                   # Core functionality
+│       ├── Core/                   # Chức năng cốt lõi
 │       ├── Managers/               # Manager classes
-│       ├── Models/                 # Data models
+│       ├── Models/                 # Mô hình dữ liệu
 │       └── UI/                     # UI components
 │
 └── Documentation/
-    ├── USER_GUIDE.md              # User guide
-    ├── DEPLOYMENT.md              # Deployment guide
-    └── QUICK_START.md             # This file
+    ├── USER_GUIDE.md              # Hướng dẫn người dùng
+    ├── DEPLOYMENT.md              # Hướng dẫn deployment
+    └── QUICK_START.md             # File này
 ```
 
 ---
 
-## 🔐 Security
+## 🔐 Bảo mật
 
-### Before Production
+### Trước khi Production
 
-- [ ] Change default database password
-- [ ] Generate strong JWT secret
-- [ ] Enable HTTPS/SSL
-- [ ] Configure firewall
-- [ ] Set up rate limiting
-- [ ] Enable security headers
-- [ ] Regular backups
-- [ ] Monitoring and alerts
+- [ ] Thay đổi mật khẩu database mặc định
+- [ ] Tạo JWT secret mạnh
+- [ ] Bật HTTPS/SSL
+- [ ] Cấu hình firewall
+- [ ] Thiết lập rate limiting
+- [ ] Bật security headers
+- [ ] Backup định kỳ
+- [ ] Monitoring và alerts
 
-See [Deployment Guide](Server/DEPLOYMENT.md) for security checklist.
+Xem [Hướng dẫn Deployment](Server/DEPLOYMENT.md) để biết checklist bảo mật.
 
 ---
 
@@ -250,7 +250,7 @@ See [Deployment Guide](Server/DEPLOYMENT.md) for security checklist.
 curl http://localhost:3000/health
 ```
 
-### View Metrics
+### Xem Metrics
 ```bash
 # Application logs
 docker-compose logs -f app
@@ -260,55 +260,55 @@ docker-compose exec postgres psql -U postgres -d friend_system
 ```
 
 ### Performance Monitoring
-- Friend list load time: < 2 seconds
-- Friend request processing: < 1 second
-- Concurrent users: 1000+
+- Thời gian load danh sách bạn bè: < 2 giây
+- Xử lý lời mời kết bạn: < 1 giây
+- Người dùng đồng thời: 1000+
 
 ---
 
-## 🤝 Support
+## 🤝 Hỗ trợ
 
-### Getting Help
+### Nhận Trợ giúp
 
-1. **Documentation**: Check the relevant guide
-2. **Logs**: Review application logs
-3. **Issues**: Check for known issues
-4. **Community**: Ask in forums or Discord
+1. **Tài liệu**: Kiểm tra hướng dẫn liên quan
+2. **Logs**: Xem lại application logs
+3. **Issues**: Kiểm tra các vấn đề đã biết
+4. **Cộng đồng**: Hỏi trong forums hoặc Discord
 
-### Useful Links
+### Liên kết Hữu ích
 
-- [API Documentation](Server/API_DOCUMENTATION.md)
-- [User Guide](USER_GUIDE.md)
-- [Deployment Guide](Server/DEPLOYMENT.md)
-- [Troubleshooting](Server/DEPLOYMENT.md#troubleshooting)
-
----
-
-## 📝 Next Steps
-
-### For Developers
-1. Read the [API Documentation](Server/API_DOCUMENTATION.md)
-2. Set up your development environment
-3. Run the test suite
-4. Start building features
-
-### For Users
-1. Read the [User Guide](USER_GUIDE.md)
-2. Create your account
-3. Add some friends
-4. Explore the features
-
-### For Administrators
-1. Read the [Deployment Guide](Server/DEPLOYMENT.md)
-2. Set up production environment
-3. Configure monitoring
-4. Set up backups
+- [Tài liệu API](Server/API_DOCUMENTATION.md)
+- [Hướng dẫn Người dùng](USER_GUIDE.md)
+- [Hướng dẫn Deployment](Server/DEPLOYMENT.md)
+- [Xử lý Sự cố](Server/DEPLOYMENT.md#troubleshooting)
 
 ---
 
-## 🎉 You're Ready!
+## 📝 Các Bước Tiếp theo
 
-The Friend System is now set up and ready to use. Enjoy connecting with friends!
+### Dành cho Developers
+1. Đọc [Tài liệu API](Server/API_DOCUMENTATION.md)
+2. Thiết lập môi trường phát triển
+3. Chạy test suite
+4. Bắt đầu xây dựng tính năng
 
-**Version**: 1.0.0  
-**Last Updated**: October 28, 2025
+### Dành cho Người dùng
+1. Đọc [Hướng dẫn Người dùng](USER_GUIDE.md)
+2. Tạo tài khoản của bạn
+3. Thêm một số bạn bè
+4. Khám phá các tính năng
+
+### Dành cho Quản trị viên
+1. Đọc [Hướng dẫn Deployment](Server/DEPLOYMENT.md)
+2. Thiết lập môi trường production
+3. Cấu hình monitoring
+4. Thiết lập backups
+
+---
+
+## 🎉 Bạn đã Sẵn sàng!
+
+Hệ thống Bạn bè hiện đã được thiết lập và sẵn sàng sử dụng. Hãy tận hưởng việc kết nối với bạn bè!
+
+**Phiên bản**: 1.0.0  
+**Cập nhật lần cuối**: 28 tháng 10, 2025

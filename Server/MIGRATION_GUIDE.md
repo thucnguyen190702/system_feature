@@ -1,34 +1,34 @@
-# Database Migration Guide
+# Hướng dẫn Database Migration - Hướng dẫn Sử dụng
 
-## Overview
+## Tổng quan
 
-This guide explains how to set up and run database migrations for the Friend System.
+Hướng dẫn này giải thích cách thiết lập và chạy database migrations cho Friend System.
 
-## Prerequisites
+## Yêu cầu Tiên quyết
 
-1. **PostgreSQL Installation**
-   - Install PostgreSQL 14 or higher
-   - Ensure PostgreSQL service is running
-   - Default port: 5432
+1. **Cài đặt PostgreSQL**
+   - Cài đặt PostgreSQL 14 trở lên
+   - Đảm bảo PostgreSQL service đang chạy
+   - Port mặc định: 5432
 
-2. **Database Setup**
+2. **Thiết lập Database**
    ```bash
-   # Connect to PostgreSQL
+   # Kết nối đến PostgreSQL
    psql -U postgres
    
-   # Create database
+   # Tạo database
    CREATE DATABASE friend_system_db;
    
-   # Verify database
+   # Xác minh database
    \l
    
-   # Exit
+   # Thoát
    \q
    ```
 
-3. **Environment Configuration**
-   - Copy `.env.example` to `.env` if not already done
-   - Update database credentials in `.env`:
+3. **Cấu hình Môi trường**
+   - Copy `.env.example` thành `.env` nếu chưa làm
+   - Cập nhật thông tin database trong `.env`:
      ```
      DB_HOST=localhost
      DB_PORT=5432

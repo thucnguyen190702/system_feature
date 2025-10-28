@@ -1,38 +1,38 @@
-# Logging and Monitoring Implementation Summary
+# Tóm tắt Triển khai Logging và Monitoring - Hướng dẫn Sử dụng
 
-## ✅ Completed Components
+## ✅ Các Component Đã hoàn thành
 
-### 1. Winston Logger Setup
+### 1. Thiết lập Winston Logger
 **File**: `Server/src/config/logger.ts`
-- ✅ Configured Winston with JSON format
-- ✅ Added timestamp and stack trace support
-- ✅ File transports: `logs/error.log` and `logs/combined.log`
-- ✅ Console transport for development
+- ✅ Cấu hình Winston với JSON format
+- ✅ Thêm hỗ trợ timestamp và stack trace
+- ✅ File transports: `logs/error.log` và `logs/combined.log`
+- ✅ Console transport cho development
 - ✅ Log rotation (5MB, 5 files)
-- ✅ Environment-based log levels
+- ✅ Log levels dựa trên môi trường
 
 ### 2. Request Logging Middleware
 **File**: `Server/src/middleware/requestLogger.ts`
-- ✅ Logs all incoming API requests
+- ✅ Logs tất cả incoming API requests
 - ✅ Captures: method, URL, IP, user agent
-- ✅ Logs response status and duration
+- ✅ Logs response status và duration
 - ✅ Non-blocking async logging
 
 ### 3. Error Logging Middleware
 **File**: `Server/src/middleware/errorLogger.ts`
-- ✅ Logs errors with full stack traces
+- ✅ Logs errors với full stack traces
 - ✅ Captures request context
-- ✅ Separate error handler for responses
-- ✅ Development mode shows stack traces
+- ✅ Error handler riêng cho responses
+- ✅ Development mode hiển thị stack traces
 
-### 4. Metrics Collection System
+### 4. Hệ thống Thu thập Metrics
 **File**: `Server/src/utils/metrics.ts`
-- ✅ Counter metrics (incrementing values)
-- ✅ Gauge metrics (current values)
-- ✅ Histogram metrics (distributions)
-- ✅ Predefined metric names
-- ✅ Metrics middleware for automatic tracking
-- ✅ Metrics summary logging (every 5 min in production)
+- ✅ Counter metrics (giá trị tăng dần)
+- ✅ Gauge metrics (giá trị hiện tại)
+- ✅ Histogram metrics (phân phối)
+- ✅ Tên metrics được định nghĩa trước
+- ✅ Metrics middleware cho automatic tracking
+- ✅ Metrics summary logging (mỗi 5 phút trong production)
 
 ### 5. Integration
 **File**: `Server/src/index.ts`

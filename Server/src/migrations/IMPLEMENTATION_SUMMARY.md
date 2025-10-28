@@ -1,25 +1,25 @@
-# Task 2: Database Schema Implementation - Summary
+# Task 2: Triển khai Database Schema - Tóm tắt - Hướng dẫn Sử dụng
 
-## Completed: ✅
+## Hoàn thành: ✅
 
-All subtasks for Task 2 "Triển khai Database Schema" have been successfully implemented.
+Tất cả subtasks cho Task 2 "Triển khai Database Schema" đã được triển khai thành công.
 
-## What Was Implemented
+## Những gì Đã triển khai
 
-### 2.1 ✅ Accounts Table Migration
+### 2.1 ✅ Migration Bảng Accounts
 **File:** `Server/src/migrations/1700000001-CreateAccountsTable.ts`
 
-Created migration for the `accounts` table with:
+Đã tạo migration cho bảng `accounts` với:
 - Primary key: `account_id` (VARCHAR 36)
-- Unique constraint on `username`
+- Unique constraint trên `username`
 - Columns: username, display_name, avatar_url, level, status, is_online, last_seen_at, created_at, updated_at
 - Indexes:
-  - `idx_accounts_username` - for fast username lookups
-  - `idx_accounts_status` - for filtering by status
-  - `idx_accounts_is_online` - for online status queries
-- Full rollback support in `down()` method
+  - `idx_accounts_username` - cho username lookups nhanh
+  - `idx_accounts_status` - cho filtering theo status
+  - `idx_accounts_is_online` - cho online status queries
+- Hỗ trợ rollback đầy đủ trong method `down()`
 
-**Requirements Addressed:** 1.1, 1.2
+**Yêu cầu Được giải quyết:** 1.1, 1.2
 
 ---
 

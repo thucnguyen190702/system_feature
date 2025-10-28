@@ -1,17 +1,17 @@
-# Friend List Caching Implementation
+# Triển khai Friend List Caching - Hướng dẫn Sử dụng
 
-## Overview
+## Tổng quan
 
-This implementation provides an optional Redis-based caching layer for friend lists to improve performance and reduce database load.
+Triển khai này cung cấp lớp caching dựa trên Redis tùy chọn cho friend lists để cải thiện hiệu suất và giảm tải database.
 
-**Requirements:** 6.1, 6.3
+**Yêu cầu:** 6.1, 6.3
 
-## Features
+## Tính năng
 
-- **5-minute cache TTL**: Friend lists are cached for 5 minutes
-- **Automatic invalidation**: Cache is invalidated when friends are added or removed
-- **Graceful degradation**: System works without Redis if it's unavailable
-- **Performance improvement**: Reduces database queries for frequently accessed friend lists
+- **5-minute cache TTL**: Friend lists được cache trong 5 phút
+- **Automatic invalidation**: Cache bị invalidate khi friends được thêm hoặc xóa
+- **Graceful degradation**: Hệ thống hoạt động mà không cần Redis nếu không khả dụng
+- **Performance improvement**: Giảm database queries cho friend lists được truy cập thường xuyên
 
 ## Architecture
 

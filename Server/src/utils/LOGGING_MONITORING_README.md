@@ -1,25 +1,25 @@
-# Logging and Monitoring System
+# Hệ thống Logging và Monitoring - Hướng dẫn Sử dụng
 
-## Overview
+## Tổng quan
 
-The Friend System server includes comprehensive logging and monitoring capabilities using Winston for logging and a custom metrics collection system.
+Friend System server bao gồm khả năng logging và monitoring toàn diện sử dụng Winston cho logging và hệ thống thu thập metrics tùy chỉnh.
 
-## Components
+## Các Component
 
 ### 1. Winston Logger (`config/logger.ts`)
 
-The logger is configured with:
+Logger được cấu hình với:
 - **Log Levels**: debug, info, warn, error
 - **File Transports**:
-  - `logs/error.log` - Error logs only
-  - `logs/combined.log` - All logs
-- **Console Transport**: Development mode only
-- **Log Rotation**: 5MB max file size, 5 files retained
-- **Format**: JSON with timestamps and stack traces
+  - `logs/error.log` - Chỉ error logs
+  - `logs/combined.log` - Tất cả logs
+- **Console Transport**: Chỉ trong development mode
+- **Log Rotation**: Tối đa 5MB file size, giữ lại 5 files
+- **Format**: JSON với timestamps và stack traces
 
 ### 2. Request Logger (`middleware/requestLogger.ts`)
 
-Logs all incoming API requests with:
+Logs tất cả incoming API requests với:
 - HTTP method
 - URL
 - IP address
@@ -29,18 +29,18 @@ Logs all incoming API requests with:
 
 ### 3. Error Logger (`middleware/errorLogger.ts`)
 
-Logs all errors with:
-- Error name, message, and stack trace
+Logs tất cả errors với:
+- Error name, message và stack trace
 - Request context (method, URL, headers, body)
-- IP address and user agent
+- IP address và user agent
 - Timestamp
 
 ### 4. Metrics Collector (`utils/metrics.ts`)
 
-Tracks system metrics including:
-- **Counters**: Incrementing values (e.g., total requests)
-- **Gauges**: Current values (e.g., active connections)
-- **Histograms**: Value distributions (e.g., response times)
+Theo dõi system metrics bao gồm:
+- **Counters**: Giá trị tăng dần (ví dụ: tổng requests)
+- **Gauges**: Giá trị hiện tại (ví dụ: active connections)
+- **Histograms**: Phân phối giá trị (ví dụ: response times)
 
 #### Available Metrics
 

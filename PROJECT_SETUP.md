@@ -1,87 +1,87 @@
-# Friend System - Complete Project Setup
+# Hệ thống Bạn bè - Hướng dẫn Thiết lập Dự án Hoàn chỉnh
 
-This guide covers the complete setup for both the Unity Client and Node.js Server.
+Hướng dẫn này bao gồm thiết lập đầy đủ cho cả Unity Client và Node.js Server.
 
-## Project Structure
+## Cấu trúc Dự án
 
 ```
 friend-system/
 ├── Client/                          # Unity Project
 │   └── Assets/
 │       └── Scripts/
-│           └── FriendSystem/        # Friend System Scripts
-│               ├── Config/          # Configuration
-│               ├── Core/            # Core functionality
-│               ├── Models/          # Data models
+│           └── FriendSystem/        # Scripts Hệ thống Bạn bè
+│               ├── Config/          # Cấu hình
+│               ├── Core/            # Chức năng cốt lõi
+│               ├── Models/          # Mô hình dữ liệu
 │               ├── README.md
-│               └── SETUP.md         # Unity setup guide
+│               └── SETUP.md         # Hướng dẫn thiết lập Unity
 ├── Server/                          # Node.js Server
 │   ├── src/
-│   │   ├── config/                  # Server configuration
+│   │   ├── config/                  # Cấu hình server
 │   │   ├── entities/                # TypeORM entities
 │   │   └── index.ts                 # Entry point
-│   ├── .env                         # Environment variables
+│   ├── .env                         # Biến môi trường
 │   ├── package.json
 │   ├── tsconfig.json
 │   ├── README.md
-│   └── SETUP.md                     # Server setup guide
-└── PROJECT_SETUP.md                 # This file
+│   └── SETUP.md                     # Hướng dẫn thiết lập server
+└── PROJECT_SETUP.md                 # File này
 ```
 
-## Quick Start
+## Khởi động Nhanh
 
-### 1. Server Setup
+### 1. Thiết lập Server
 
 ```bash
-# Navigate to server directory
+# Chuyển đến thư mục server
 cd Server
 
-# Install dependencies
+# Cài đặt dependencies
 npm install
 
-# Configure environment
+# Cấu hình môi trường
 cp .env.example .env
-# Edit .env with your database credentials
+# Chỉnh sửa .env với thông tin database của bạn
 
-# Create PostgreSQL database
+# Tạo PostgreSQL database
 createdb friend_system_db
 
-# Start development server
+# Khởi động development server
 npm run dev
 ```
 
-Server will run on: http://localhost:3000
+Server sẽ chạy tại: http://localhost:3000
 
-### 2. Unity Client Setup
+### 2. Thiết lập Unity Client
 
-1. Open the Unity project in `Client/` folder
-2. Install Newtonsoft.Json package:
+1. Mở Unity project trong thư mục `Client/`
+2. Cài đặt Newtonsoft.Json package:
    - Window > Package Manager
    - Add package by name: `com.unity.nuget.newtonsoft-json`
-3. Create FriendSystemConfig asset:
-   - Right-click in Project > Create > Friend System > Config
-   - Set Server URL to `http://localhost:3000`
-4. Verify Project Settings:
+3. Tạo FriendSystemConfig asset:
+   - Right-click trong Project > Create > Friend System > Config
+   - Đặt Server URL thành `http://localhost:3000`
+4. Kiểm tra Project Settings:
    - Edit > Project Settings > Player
    - Api Compatibility Level: **.NET Standard 2.1**
 
-## Detailed Setup Guides
+## Hướng dẫn Thiết lập Chi tiết
 
-- **Server Setup**: See `Server/SETUP.md`
-- **Unity Client Setup**: See `Client/Assets/Scripts/FriendSystem/SETUP.md`
+- **Thiết lập Server**: Xem `Server/SETUP.md`
+- **Thiết lập Unity Client**: Xem `Client/Assets/Scripts/FriendSystem/SETUP.md`
 
-## Prerequisites
+## Yêu cầu Tiên quyết
 
 ### Server
 - Node.js 18+ LTS
 - PostgreSQL 14+
-- npm or yarn
+- npm hoặc yarn
 
 ### Unity Client
-- Unity 2021.3 LTS or newer
-- .NET Standard 2.1 support
+- Unity 2021.3 LTS trở lên
+- Hỗ trợ .NET Standard 2.1
 
-## Environment Configuration
+## Cấu hình Môi trường
 
 ### Server (.env)
 
@@ -108,24 +108,24 @@ CORS_ORIGIN=*
 ### Unity Client (FriendSystemConfig)
 
 - **Server URL**: http://localhost:3000
-- **Request Timeout**: 30 seconds
+- **Request Timeout**: 30 giây
 - **Max Friends**: 100
 
-## Verification
+## Kiểm tra Hoạt động
 
 ### Test Server
 
 ```bash
-# Health check
+# Kiểm tra sức khỏe server
 curl http://localhost:3000/health
 
-# Expected response:
+# Phản hồi mong đợi:
 # {"status":"ok","timestamp":"...","service":"Friend System API"}
 ```
 
 ### Test Unity Client
 
-1. Create a test GameObject with this script:
+1. Tạo một test GameObject với script này:
 
 ```csharp
 using UnityEngine;
@@ -139,98 +139,98 @@ public class TestConnection : MonoBehaviour
         try
         {
             var result = await client.GetAsync<object>("/health");
-            Debug.Log("✅ Connected to server!");
+            Debug.Log("✅ Kết nối server thành công!");
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"❌ Connection failed: {e.Message}");
+            Debug.LogError($"❌ Kết nối thất bại: {e.Message}");
         }
     }
 }
 ```
 
-2. Enter Play mode and check Console
+2. Vào Play mode và kiểm tra Console
 
-## Current Implementation Status
+## Trạng thái Triển khai Hiện tại
 
-✅ **Task 1: Infrastructure Setup** (COMPLETED)
-- Server project structure created
-- TypeScript and TypeORM configured
-- Database connection setup
-- Environment variables configured
-- Unity client structure created
-- API client implemented
-- Data models defined
+✅ **Task 1: Thiết lập Hạ tầng** (HOÀN THÀNH)
+- Cấu trúc dự án server đã tạo
+- TypeScript và TypeORM đã cấu hình
+- Thiết lập kết nối database
+- Biến môi trường đã cấu hình
+- Cấu trúc Unity client đã tạo
+- API client đã triển khai
+- Mô hình dữ liệu đã định nghĩa
 
-⏳ **Next Tasks**:
+⏳ **Các Task Tiếp theo**:
 - Task 2: Database Schema (migrations)
-- Task 3: TypeORM Entities (already created, needs testing)
+- Task 3: TypeORM Entities (đã tạo, cần test)
 - Task 4+: Services, Controllers, Managers, UI
 
-## Technology Stack
+## Công nghệ Sử dụng
 
 ### Backend
 - **Runtime**: Node.js 18+
-- **Language**: TypeScript 5.0+
+- **Ngôn ngữ**: TypeScript 5.0+
 - **Framework**: Express.js 4.x
 - **ORM**: TypeORM 0.3+
 - **Database**: PostgreSQL 14+
-- **Authentication**: JWT
+- **Xác thực**: JWT
 - **Logging**: Winston
 
 ### Frontend
 - **Engine**: Unity 2021.3 LTS+
-- **Language**: C# (.NET Standard 2.1)
+- **Ngôn ngữ**: C# (.NET Standard 2.1)
 - **HTTP Client**: UnityWebRequest
 - **JSON**: Newtonsoft.Json
 - **Async**: Task-based async/await
 
-## Development Workflow
+## Quy trình Phát triển
 
-1. **Start Server**: `cd Server && npm run dev`
-2. **Open Unity**: Open `Client/` project
-3. **Develop**: Make changes to server or client
-4. **Test**: Use Unity Play mode or API testing tools
-5. **Commit**: Commit changes to version control
+1. **Khởi động Server**: `cd Server && npm run dev`
+2. **Mở Unity**: Mở project `Client/`
+3. **Phát triển**: Thực hiện thay đổi trên server hoặc client
+4. **Test**: Sử dụng Unity Play mode hoặc API testing tools
+5. **Commit**: Commit thay đổi vào version control
 
-## Troubleshooting
+## Xử lý Sự cố
 
-### Common Issues
+### Các Vấn đề Thường gặp
 
-1. **Database connection failed**
-   - Verify PostgreSQL is running
-   - Check credentials in `.env`
-   - Ensure database exists
+1. **Kết nối database thất bại**
+   - Kiểm tra PostgreSQL đang chạy
+   - Kiểm tra thông tin đăng nhập trong `.env`
+   - Đảm bảo database tồn tại
 
-2. **Unity compilation errors**
-   - Install Newtonsoft.Json package
-   - Set Api Compatibility Level to .NET Standard 2.1
-   - Restart Unity Editor
+2. **Lỗi compilation Unity**
+   - Cài đặt Newtonsoft.Json package
+   - Đặt Api Compatibility Level thành .NET Standard 2.1
+   - Khởi động lại Unity Editor
 
-3. **CORS errors**
-   - Set `CORS_ORIGIN=*` in server `.env`
-   - Restart server
+3. **Lỗi CORS**
+   - Đặt `CORS_ORIGIN=*` trong server `.env`
+   - Khởi động lại server
 
-4. **Port already in use**
-   - Change `PORT` in `.env`
-   - Or stop the process using that port
+4. **Port đã được sử dụng**
+   - Thay đổi `PORT` trong `.env`
+   - Hoặc dừng process đang sử dụng port đó
 
-## Support
+## Hỗ trợ
 
-For detailed setup instructions:
+Để có hướng dẫn thiết lập chi tiết:
 - Server: `Server/SETUP.md`
 - Unity Client: `Client/Assets/Scripts/FriendSystem/SETUP.md`
 - Server API: `Server/README.md`
 - Client Usage: `Client/Assets/Scripts/FriendSystem/README.md`
 
-## Next Steps
+## Các Bước Tiếp theo
 
-1. Complete Task 2: Implement Database Schema
-2. Run migrations to create tables
-3. Implement services and controllers
-4. Build Unity managers and UI components
+1. Hoàn thành Task 2: Triển khai Database Schema
+2. Chạy migrations để tạo tables
+3. Triển khai services và controllers
+4. Xây dựng Unity managers và UI components
 5. Integration testing
 
 ---
 
-**Note**: This is Task 1 of the implementation plan. The infrastructure is now ready for subsequent tasks.
+**Lưu ý**: Đây là Task 1 của kế hoạch triển khai. Hạ tầng hiện đã sẵn sàng cho các task tiếp theo.

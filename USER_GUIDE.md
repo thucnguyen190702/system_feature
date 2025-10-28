@@ -1,517 +1,458 @@
-# Friend System User Guide
+# Hệ thống Bạn bè - Hướng dẫn Người dùng
 
-Welcome to the Friend System! This guide will help you understand how to use all the features of the friend system in the game.
+Chào mừng bạn đến với Hệ thống Bạn bè! Hướng dẫn này sẽ giúp bạn hiểu cách sử dụng tất cả các tính năng của hệ thống bạn bè trong game.
 
-## Table of Contents
+## Mục lục
 
-1. [Getting Started](#getting-started)
-2. [Creating Your Account](#creating-your-account)
-3. [Finding Friends](#finding-friends)
-4. [Adding Friends](#adding-friends)
-5. [Managing Your Friend List](#managing-your-friend-list)
-6. [Friend Requests](#friend-requests)
-7. [Online Status](#online-status)
-8. [Blocking Users](#blocking-users)
-9. [Tips and Best Practices](#tips-and-best-practices)
-10. [Troubleshooting](#troubleshooting)
-
----
-
-## Getting Started
-
-The Friend System allows you to connect with other players, see when they're online, and build your gaming community. You can search for friends by username or ID, send friend requests, and manage your friend list easily.
-
-### Key Features
-
-- **Search Players**: Find other players by username or unique ID
-- **Friend Requests**: Send and receive friend requests
-- **Friend List**: View all your friends in one place
-- **Online Status**: See which friends are currently online
-- **Profile Viewing**: Check out your friends' profiles
-- **Block List**: Block unwanted users
+1. [Bắt đầu](#bắt-đầu)
+2. [Tạo Tài khoản](#tạo-tài-khoản)
+3. [Tìm Bạn bè](#tìm-bạn-bè)
+4. [Thêm Bạn bè](#thêm-bạn-bè)
+5. [Quản lý Danh sách Bạn bè](#quản-lý-danh-sách-bạn-bè)
+6. [Lời mời Kết bạn](#lời-mời-kết-bạn)
+7. [Trạng thái Online](#trạng-thái-online)
+8. [Chặn Người dùng](#chặn-người-dùng)
+9. [Mẹo và Thực hành Tốt nhất](#mẹo-và-thực-hành-tốt-nhất)
+10. [Xử lý Sự cố](#xử-lý-sự-cố)
 
 ---
 
-## Creating Your Account
+## Bắt đầu
 
-When you first start the game, you'll need to create an in-game account.
+Hệ thống Bạn bè cho phép bạn kết nối với những người chơi khác, xem khi nào họ online, và xây dựng cộng đồng game của bạn. Bạn có thể tìm kiếm bạn bè theo username hoặc ID, gửi lời mời kết bạn, và quản lý danh sách bạn bè một cách dễ dàng.
 
-### Steps to Create Account
+### Tính năng Chính
 
-1. **Launch the game** and you'll see the account creation screen
-2. **Enter your username** (must be unique)
-3. **Choose a display name** (this is what other players will see)
-4. **Select an avatar** (optional)
-5. **Click "Create Account"**
-
-### Account Information
-
-Your account includes:
-- **Account ID**: A unique identifier (automatically generated)
-- **Username**: Your login name (cannot be changed)
-- **Display Name**: Your visible name (can be changed)
-- **Avatar**: Your profile picture (can be changed)
-- **Level**: Your current game level (updates automatically)
-- **Status**: Your account status (active, offline, etc.)
-
-### Updating Your Profile
-
-To update your profile information:
-
-1. Open the **Main Menu**
-2. Select **Profile**
-3. Click **Edit Profile**
-4. Update your **Display Name** or **Avatar**
-5. Click **Save Changes**
+- **Tìm kiếm Người chơi**: Tìm những người chơi khác theo username hoặc ID duy nhất
+- **Lời mời Kết bạn**: Gửi và nhận lời mời kết bạn
+- **Danh sách Bạn bè**: Xem tất cả bạn bè của bạn ở một nơi
+- **Trạng thái Online**: Xem bạn bè nào đang online
+- **Xem Profile**: Kiểm tra profile của bạn bè
+- **Danh sách Chặn**: Chặn những người dùng không mong muốn
 
 ---
 
-## Finding Friends
+## Tạo Tài khoản
 
-There are two ways to find other players:
+Khi bạn khởi động game lần đầu, bạn sẽ cần tạo một tài khoản trong game.
 
-### Method 1: Search by Username
+### Các Bước Tạo Tài khoản
 
-1. Click the **"Add Friend"** button (+ icon) on the main screen
-2. Select **"Search by Username"**
-3. Type the username in the search box (minimum 2 characters)
-4. Press **Enter** or click **Search**
-5. Browse the search results
+1. **Khởi động game** và bạn sẽ thấy màn hình tạo tài khoản
+2. **Nhập username** (phải là duy nhất)
+3. **Chọn tên hiển thị** (đây là tên mà người chơi khác sẽ thấy)
+4. **Chọn avatar** (tùy chọn)
+5. **Nhấp "Tạo Tài khoản"**
 
-**Example**: Searching for "player" will show all usernames containing "player" like "player123", "coolplayer", etc.
+### Thông tin Tài khoản
 
-### Method 2: Search by Account ID
+Tài khoản của bạn bao gồm:
+- **Account ID**: Mã định danh duy nhất (tự động tạo)
+- **Username**: Tên đăng nhập (không thể thay đổi)
+- **Display Name**: Tên hiển thị (có thể thay đổi)
+- **Avatar**: Ảnh đại diện (có thể thay đổi)
+- **Level**: Level game hiện tại (cập nhật tự động)
+- **Status**: Trạng thái tài khoản (active, offline, v.v.)
 
-1. Click the **"Add Friend"** button
-2. Select **"Search by ID"**
-3. Enter the exact Account ID
-4. Click **Search**
-5. View the player's profile
+### Cập nhật Profile
 
-**Tip**: You can find your Account ID in your profile and share it with friends!
+Để cập nhật thông tin profile:
 
-### Search Results
+1. Mở **Main Menu**
+2. Chọn **Profile**
+3. Nhấp **Edit Profile**
+4. Cập nhật **Display Name** hoặc **Avatar**
+5. Nhấp **Save Changes**
 
-Search results show:
-- Player's display name
+---
+
+## Tìm Bạn bè
+
+Có hai cách để tìm những người chơi khác:
+
+### Phương pháp 1: Tìm kiếm theo Username
+
+1. Nhấp nút **"Add Friend"** (biểu tượng +) trên màn hình chính
+2. Chọn **"Search by Username"**
+3. Gõ username vào ô tìm kiếm (tối thiểu 2 ký tự)
+4. Nhấn **Enter** hoặc nhấp **Search**
+5. Duyệt qua kết quả tìm kiếm
+
+**Ví dụ**: Tìm kiếm "player" sẽ hiển thị tất cả username chứa "player" như "player123", "coolplayer", v.v.
+
+### Phương pháp 2: Tìm kiếm theo Account ID
+
+1. Nhấp nút **"Add Friend"**
+2. Chọn **"Search by ID"**
+3. Nhập chính xác Account ID
+4. Nhấp **Search**
+5. Xem profile của người chơi
+
+**Mẹo**: Bạn có thể tìm Account ID của mình trong profile và chia sẻ với bạn bè!
+
+### Kết quả Tìm kiếm
+
+Kết quả tìm kiếm hiển thị:
+- Tên hiển thị của người chơi
 - Username
 - Avatar
-- Current level
-- Online/Offline status
-- **"Add Friend"** button (if not already friends)
-- **"View Profile"** button
+- Level hiện tại
+- Trạng thái Online/Offline
+- Nút **"Add Friend"** (nếu chưa là bạn bè)
+- Nút **"View Profile"**
 
 ---
 
-## Adding Friends
+## Thêm Bạn bè
 
-### Sending a Friend Request
+### Gửi Lời mời Kết bạn
 
-1. **Find the player** using search (see [Finding Friends](#finding-friends))
-2. Click on their profile or the **"Add Friend"** button
-3. Confirm you want to send the request
-4. Wait for them to accept
+1. **Tìm người chơi** bằng cách tìm kiếm (xem [Tìm Bạn bè](#tìm-bạn-bè))
+2. Nhấp vào profile của họ hoặc nút **"Add Friend"**
+3. Xác nhận bạn muốn gửi lời mời
+4. Chờ họ chấp nhận
 
-**Note**: You can send up to 10 friend requests per day.
+**Lưu ý**: Bạn có thể gửi tối đa 10 lời mời kết bạn mỗi ngày.
 
-### What Happens Next?
+### Điều gì Xảy ra Tiếp theo?
 
-- The other player receives a notification
-- They can accept or decline your request
-- If accepted, you both become friends
-- If declined, you can try again later
+- Người chơi khác nhận được thông báo
+- Họ có thể chấp nhận hoặc từ chối lời mời của bạn
+- Nếu được chấp nhận, cả hai bạn trở thành bạn bè
+- Nếu bị từ chối, bạn có thể thử lại sau
 
-### Friend Request Limits
+### Giới hạn Lời mời Kết bạn
 
-- **Daily Limit**: 10 friend requests per day
-- **Pending Requests**: No limit on pending requests
-- **Friend List Limit**: Check your current limit in the friend list screen
+- **Giới hạn Hàng ngày**: 10 lời mời kết bạn mỗi ngày
+- **Lời mời Đang chờ**: Không giới hạn số lời mời đang chờ
+- **Giới hạn Danh sách Bạn bè**: Kiểm tra giới hạn hiện tại trong màn hình danh sách bạn bè
 
 ---
 
-## Managing Your Friend List
+## Quản lý Danh sách Bạn bè
 
-### Viewing Your Friend List
+### Xem Danh sách Bạn bè
 
-1. Click the **"Friends"** icon on the main screen
-2. Your friend list will open showing all your friends
+1. Nhấp biểu tượng **"Friends"** trên màn hình chính
+2. Danh sách bạn bè sẽ mở ra hiển thị tất cả bạn bè của bạn
 
-### Friend List Information
+### Thông tin Danh sách Bạn bè
 
-For each friend, you can see:
+Với mỗi bạn bè, bạn có thể thấy:
 - **Display Name**
 - **Avatar**
 - **Level**
-- **Online Status** (green dot = online, gray dot = offline)
-- **Last Seen** (when they were last online)
+- **Online Status** (chấm xanh = online, chấm xám = offline)
+- **Last Seen** (lần cuối họ online)
 
-### Sorting Your Friend List
+### Sắp xếp Danh sách Bạn bè
 
-Click the **Sort** button to organize by:
+Nhấp nút **Sort** để sắp xếp theo:
 - **Name** (A-Z)
-- **Level** (highest to lowest)
-- **Online Status** (online friends first)
-- **Recently Added** (newest friends first)
+- **Level** (cao nhất đến thấp nhất)
+- **Online Status** (bạn bè online trước)
+- **Recently Added** (bạn bè mới nhất trước)
 
-### Searching Within Friend List
+### Tìm kiếm trong Danh sách Bạn bè
 
-1. Open your friend list
-2. Use the **search bar** at the top
-3. Type any part of a friend's name
-4. The list filters in real-time
+1. Mở danh sách bạn bè
+2. Sử dụng **thanh tìm kiếm** ở trên cùng
+3. Gõ bất kỳ phần nào của tên bạn bè
+4. Danh sách lọc theo thời gian thực
 
-### Viewing a Friend's Profile
+### Xem Profile Bạn bè
 
-1. Open your friend list
-2. Click on any friend
-3. Their profile opens showing:
-   - Full profile information
-   - Current online status
-   - Last seen time
-   - Game statistics
-   - Options to remove friend or view more details
+1. Mở danh sách bạn bè
+2. Nhấp vào bất kỳ bạn bè nào
+3. Profile của họ mở ra hiển thị:
+   - Thông tin profile đầy đủ
+   - Trạng thái online hiện tại
+   - Thời gian thấy lần cuối
+   - Thống kê game
+   - Tùy chọn xóa bạn bè hoặc xem thêm chi tiết
 
-### Removing a Friend
+### Xóa Bạn bè
 
-1. Open your friend list
-2. Click on the friend you want to remove
-3. Click **"Remove Friend"**
-4. Confirm the action
+1. Mở danh sách bạn bè
+2. Nhấp vào bạn bè bạn muốn xóa
+3. Nhấp **"Remove Friend"**
+4. Xác nhận hành động
 
-**Warning**: Removing a friend is permanent. You'll need to send a new friend request to reconnect.
+**Cảnh báo**: Xóa bạn bè là vĩnh viễn. Bạn sẽ cần gửi lời mời kết bạn mới để kết nối lại.
 
 ---
 
-## Friend Requests
+## Lời mời Kết bạn
 
-### Viewing Pending Requests
+### Xem Lời mời Đang chờ
 
-1. Click the **"Friend Requests"** icon (bell icon with notification badge)
-2. See all pending incoming requests
+1. Nhấp biểu tượng **"Friend Requests"** (biểu tượng chuông có badge thông báo)
+2. Xem tất cả lời mời đến đang chờ
 
-The notification badge shows the number of pending requests.
+Badge thông báo hiển thị số lượng lời mời đang chờ.
 
-### Accepting a Friend Request
+### Chấp nhận Lời mời Kết bạn
 
-1. Open **Friend Requests**
-2. Review the request details:
-   - Sender's name
+1. Mở **Friend Requests**
+2. Xem lại chi tiết lời mời:
+   - Tên người gửi
    - Avatar
    - Level
-   - When the request was sent
-3. Click **"Accept"**
-4. The player is added to your friend list
+   - Khi nào lời mời được gửi
+3. Nhấp **"Accept"**
+4. Người chơi được thêm vào danh sách bạn bè
 
-### Declining a Friend Request
+### Từ chối Lời mời Kết bạn
 
-1. Open **Friend Requests**
-2. Find the request you want to decline
-3. Click **"Decline"** or **"Reject"**
-4. The request is removed
+1. Mở **Friend Requests**
+2. Tìm lời mời bạn muốn từ chối
+3. Nhấp **"Decline"** hoặc **"Reject"**
+4. Lời mời bị xóa
 
-**Note**: The sender won't be notified that you declined.
+**Lưu ý**: Người gửi sẽ không được thông báo rằng bạn đã từ chối.
 
-### Viewing Sent Requests
+### Xem Lời mời Đã gửi
 
-To see requests you've sent:
+Để xem các lời mời bạn đã gửi:
 
-1. Open **Friend Requests**
-2. Switch to the **"Sent"** tab
-3. View all pending outgoing requests
-4. You can cancel sent requests if needed
-
----
-
-## Online Status
-
-### Understanding Online Status
-
-- **Green Dot**: Friend is currently online
-- **Gray Dot**: Friend is offline
-- **Last Seen**: Shows when offline friends were last online
-
-### Your Online Status
-
-Your status updates automatically:
-- **Online**: When you're playing the game
-- **Offline**: When you close the game or disconnect
-
-### Checking Friends' Online Status
-
-1. Open your **Friend List**
-2. Online friends appear with a green indicator
-3. Sort by **Online Status** to see all online friends at the top
-
-### Real-Time Updates
-
-The friend list updates automatically when:
-- A friend comes online
-- A friend goes offline
-- You receive a new friend request
+1. Mở **Friend Requests**
+2. Chuyển sang tab **"Sent"**
+3. Xem tất cả lời mời đi đang chờ
+4. Bạn có thể hủy lời mời đã gửi nếu cần
 
 ---
 
-## Blocking Users
+## Trạng thái Online
 
-### Why Block Someone?
+### Hiểu về Trạng thái Online
 
-Block users who:
-- Send unwanted friend requests
-- Behave inappropriately
-- You don't want to interact with
+- **Chấm Xanh**: Bạn bè đang online
+- **Chấm Xám**: Bạn bè đang offline
+- **Last Seen**: Hiển thị lần cuối bạn bè offline online
 
-### How to Block a User
+### Trạng thái Online của Bạn
 
-**Method 1: From Search Results**
-1. Search for the user
-2. Open their profile
-3. Click **"Block User"**
-4. Confirm the action
+Trạng thái của bạn cập nhật tự động:
+- **Online**: Khi bạn đang chơi game
+- **Offline**: Khi bạn đóng game hoặc mất kết nối
 
-**Method 2: From Friend List**
-1. Open the friend's profile
-2. Click **"Block User"**
-3. Confirm (this also removes them as a friend)
+### Kiểm tra Trạng thái Online của Bạn bè
 
-### What Happens When You Block Someone?
+1. Mở **Friend List**
+2. Bạn bè online xuất hiện với chỉ báo xanh
+3. Sắp xếp theo **Online Status** để thấy tất cả bạn bè online ở trên cùng
 
-- They cannot send you friend requests
-- They cannot see your online status
-- If they were your friend, they're removed from your list
-- They won't be notified that you blocked them
+### Cập nhật Thời gian Thực
 
-### Viewing Your Block List
-
-1. Open **Settings**
-2. Select **Privacy**
-3. Click **"Blocked Users"**
-4. See all blocked accounts
-
-### Unblocking a User
-
-1. Go to your **Block List**
-2. Find the user you want to unblock
-3. Click **"Unblock"**
-4. Confirm the action
+Danh sách bạn bè cập nhật tự động khi:
+- Một bạn bè online
+- Một bạn bè offline
+- Bạn nhận được lời mời kết bạn mới
 
 ---
 
-## Tips and Best Practices
+## Chặn Người dùng
 
-### Making Friends
+### Tại sao Chặn ai đó?
 
-✅ **Do**:
-- Use a friendly, recognizable username
-- Keep your profile updated
-- Be respectful when sending requests
-- Accept requests from players you know
+Chặn những người dùng:
+- Gửi lời mời kết bạn không mong muốn
+- Hành vi không phù hợp
+- Bạn không muốn tương tác
 
-❌ **Don't**:
-- Send spam friend requests
-- Use offensive usernames or avatars
-- Share your account ID publicly
-- Accept requests from unknown players if you're concerned about privacy
+### Cách Chặn Người dùng
 
-### Managing Your Friend List
+**Phương pháp 1: Từ Kết quả Tìm kiếm**
+1. Tìm kiếm người dùng
+2. Mở profile của họ
+3. Nhấp **"Block User"**
+4. Xác nhận hành động
 
-- **Regular Cleanup**: Remove inactive friends periodically
-- **Organize**: Use the sort feature to find friends easily
-- **Stay Connected**: Check online status to play with friends
-- **Privacy**: Use the block feature for unwanted interactions
+**Phương pháp 2: Từ Danh sách Bạn bè**
+1. Mở profile của bạn bè
+2. Nhấp **"Block User"**
+3. Xác nhận (điều này cũng xóa họ khỏi danh sách bạn bè)
 
-### Friend Request Etiquette
+### Điều gì Xảy ra Khi Bạn Chặn ai đó?
 
-- **Be Patient**: Not everyone accepts requests immediately
-- **Don't Spam**: Respect the daily limit
-- **Play Together**: Send requests to players you've enjoyed playing with
-- **Communicate**: If you meet someone in-game, mention you'll send a request
+- Họ không thể gửi lời mời kết bạn cho bạn
+- Họ không thể thấy trạng thái online của bạn
+- Nếu họ là bạn bè, họ bị xóa khỏi danh sách
+- Họ sẽ không được thông báo rằng bạn đã chặn
 
-### Privacy Tips
+### Xem Danh sách Chặn
 
-- **Control Who Can Add You**: Use privacy settings
-- **Block Liberally**: Don't hesitate to block problematic users
-- **Share Carefully**: Only share your Account ID with trusted players
-- **Review Requests**: Check profiles before accepting
+1. Mở **Settings**
+2. Chọn **Privacy**
+3. Nhấp **"Blocked Users"**
+4. Xem tất cả tài khoản bị chặn
 
----
+### Bỏ chặn Người dùng
 
-## Troubleshooting
-
-### Common Issues and Solutions
-
-#### "Cannot Send Friend Request"
-
-**Possible Causes**:
-- You've reached the daily limit (10 requests/day)
-- The user has blocked you
-- You're already friends
-- A pending request already exists
-
-**Solution**: Wait 24 hours for the limit to reset, or check if you're already friends.
+1. Đi đến **Block List**
+2. Tìm người dùng bạn muốn bỏ chặn
+3. Nhấp **"Unblock"**
+4. Xác nhận hành động
 
 ---
 
-#### "Friend List Not Loading"
+## Mẹo và Thực hành Tốt nhất
 
-**Possible Causes**:
-- Network connection issues
-- Server maintenance
-- Cache issues
+### Kết bạn
 
-**Solution**:
-1. Check your internet connection
-2. Close and reopen the friend list
-3. Restart the game
-4. Check server status
+✅ **Nên**:
+- Sử dụng username thân thiện, dễ nhận biết
+- Giữ profile cập nhật
+- Tôn trọng khi gửi lời mời
+- Chấp nhận lời mời từ những người chơi bạn biết
 
----
+❌ **Không nên**:
+- Gửi spam lời mời kết bạn
+- Sử dụng username hoặc avatar xúc phạm
+- Chia sẻ Account ID công khai
+- Chấp nhận lời mời từ người chơi không quen nếu bạn quan tâm đến quyền riêng tư
 
-#### "Search Returns No Results"
+### Quản lý Danh sách Bạn bè
 
-**Possible Causes**:
-- Username doesn't exist
-- Typo in search query
-- Account ID is incorrect
+- **Dọn dẹp Định kỳ**: Xóa bạn bè không hoạt động định kỳ
+- **Tổ chức**: Sử dụng tính năng sắp xếp để tìm bạn bè dễ dàng
+- **Giữ Kết nối**: Kiểm tra trạng thái online để chơi với bạn bè
+- **Quyền riêng tư**: Sử dụng tính năng chặn cho các tương tác không mong muốn
 
-**Solution**:
-- Double-check spelling
-- Try searching with fewer characters
-- Verify the Account ID is correct
-- Ask the player to confirm their username
+### Phép lịch sự Lời mời Kết bạn
 
----
+- **Kiên nhẫn**: Không phải ai cũng chấp nhận lời mời ngay lập tức
+- **Không Spam**: Tôn trọng giới hạn hàng ngày
+- **Chơi Cùng nhau**: Gửi lời mời cho những người chơi bạn thích chơi cùng
+- **Giao tiếp**: Nếu bạn gặp ai đó trong game, đề cập rằng bạn sẽ gửi lời mời
 
-#### "Cannot Accept Friend Request"
+### Mẹo Quyền riêng tư
 
-**Possible Causes**:
-- Friend list is full
-- Request expired
-- Network error
-
-**Solution**:
-1. Check if your friend list is at capacity
-2. Remove inactive friends to make space
-3. Try again with a stable connection
+- **Kiểm soát Ai có thể Thêm Bạn**: Sử dụng cài đặt quyền riêng tư
+- **Chặn Tự do**: Đừng ngần ngại chặn người dùng có vấn đề
+- **Chia sẻ Cẩn thận**: Chỉ chia sẻ Account ID với những người chơi đáng tin cậy
+- **Xem xét Lời mời**: Kiểm tra profile trước khi chấp nhận
 
 ---
 
-#### "Online Status Not Updating"
+## Xử lý Sự cố
 
-**Possible Causes**:
-- Cache not refreshed
-- Network delay
-- Friend's status hasn't changed
+### Các Vấn đề Thường gặp và Giải pháp
 
-**Solution**:
-1. Close and reopen the friend list
-2. Wait a few seconds for auto-refresh
-3. Check your internet connection
+#### "Không thể Gửi Lời mời Kết bạn"
 
----
+**Nguyên nhân Có thể**:
+- Bạn đã đạt giới hạn hàng ngày (10 lời mời/ngày)
+- Người dùng đã chặn bạn
+- Bạn đã là bạn bè
+- Đã có lời mời đang chờ
 
-#### "Blocked User Still Appearing"
+**Giải pháp**: Chờ 24 giờ để giới hạn reset, hoặc kiểm tra xem bạn đã là bạn bè chưa.
 
-**Possible Causes**:
-- Block action didn't complete
-- Cache issue
+#### "Danh sách Bạn bè Không Load"
 
-**Solution**:
-1. Try blocking again
-2. Restart the game
-3. Contact support if issue persists
+**Nguyên nhân Có thể**:
+- Vấn đề kết nối mạng
+- Bảo trì server
+- Vấn đề cache
 
----
+**Giải pháp**:
+1. Kiểm tra kết nối internet
+2. Đóng và mở lại danh sách bạn bè
+3. Khởi động lại game
+4. Kiểm tra trạng thái server
 
-### Getting Help
+#### "Tìm kiếm Không có Kết quả"
 
-If you encounter issues not covered here:
+**Nguyên nhân Có thể**:
+- Username không tồn tại
+- Lỗi chính tả trong truy vấn tìm kiếm
+- Account ID không đúng
 
-1. **Check Server Status**: Look for maintenance announcements
-2. **Restart the Game**: Many issues resolve with a restart
-3. **Update the Game**: Ensure you have the latest version
-4. **Contact Support**: Use the in-game support feature
-5. **Community Forums**: Check if others have similar issues
+**Giải pháp**:
+- Kiểm tra lại chính tả
+- Thử tìm kiếm với ít ký tự hơn
+- Xác minh Account ID đúng
+- Hỏi người chơi xác nhận username
 
----
+### Nhận Trợ giúp
 
-## Frequently Asked Questions (FAQ)
+Nếu bạn gặp vấn đề không được đề cập ở đây:
 
-### Q: How many friends can I have?
-
-**A**: The friend list limit is displayed in your friend list screen. It may vary based on your account level or game version.
-
-### Q: Can I change my username?
-
-**A**: No, usernames are permanent. You can change your display name in your profile settings.
-
-### Q: Will my friends know if I block them?
-
-**A**: No, blocked users are not notified. They simply won't be able to send you friend requests.
-
-### Q: How long do friend requests last?
-
-**A**: Friend requests don't expire. They remain pending until accepted or declined.
-
-### Q: Can I see who declined my friend request?
-
-**A**: No, you won't receive a notification if someone declines your request.
-
-### Q: What happens to my friends if I delete my account?
-
-**A**: You'll be removed from all friend lists, and your account data will be deleted according to the privacy policy.
-
-### Q: Can I have multiple accounts?
-
-**A**: Check the game's terms of service. Multiple accounts may or may not be allowed.
-
-### Q: How do I report inappropriate behavior?
-
-**A**: Use the report feature in the user's profile or contact support through the in-game help system.
+1. **Kiểm tra Trạng thái Server**: Tìm thông báo bảo trì
+2. **Khởi động lại Game**: Nhiều vấn đề được giải quyết bằng cách khởi động lại
+3. **Cập nhật Game**: Đảm bảo bạn có phiên bản mới nhất
+4. **Liên hệ Hỗ trợ**: Sử dụng tính năng hỗ trợ trong game
+5. **Diễn đàn Cộng đồng**: Kiểm tra xem người khác có vấn đề tương tự không
 
 ---
 
-## Quick Reference
+## Câu hỏi Thường gặp (FAQ)
 
-### Main Actions
+### H: Tôi có thể có bao nhiêu bạn bè?
 
-| Action | How To |
-|--------|--------|
-| Add Friend | Click + icon → Search → Add Friend |
-| View Friends | Click Friends icon on main screen |
-| Accept Request | Friend Requests → Accept |
-| Remove Friend | Friend List → Select Friend → Remove |
-| Block User | Profile → Block User |
-| Search Player | Add Friend → Search by Username/ID |
-| Update Profile | Menu → Profile → Edit |
+**Đ**: Giới hạn danh sách bạn bè được hiển thị trong màn hình danh sách bạn bè. Nó có thể thay đổi dựa trên level tài khoản hoặc phiên bản game.
 
-### Keyboard Shortcuts (if applicable)
+### H: Tôi có thể thay đổi username không?
 
-| Shortcut | Action |
-|----------|--------|
-| F | Open Friend List |
-| R | Open Friend Requests |
-| Ctrl+F | Search in Friend List |
-| Esc | Close Current Window |
+**Đ**: Không, username là vĩnh viễn. Bạn có thể thay đổi tên hiển thị trong cài đặt profile.
 
----
+### H: Bạn bè có biết nếu tôi chặn họ không?
 
-## Conclusion
+**Đ**: Không, người dùng bị chặn không được thông báo. Họ chỉ đơn giản là không thể gửi lời mời kết bạn cho bạn.
 
-The Friend System is designed to help you build connections and enhance your gaming experience. Whether you're playing with old friends or making new ones, these features make it easy to stay connected.
+### H: Lời mời kết bạn tồn tại bao lâu?
 
-**Remember**:
-- Be respectful to other players
-- Use privacy features to protect yourself
-- Have fun and enjoy playing with friends!
+**Đ**: Lời mời kết bạn không hết hạn. Chúng vẫn đang chờ cho đến khi được chấp nhận hoặc từ chối.
 
-For more information, check out:
-- [API Documentation](Server/API_DOCUMENTATION.md) (for developers)
-- [Setup Guide](Server/SETUP.md)
-- In-game Help System
+### H: Tôi có thể thấy ai đã từ chối lời mời kết bạn của mình không?
+
+**Đ**: Không, bạn sẽ không nhận được thông báo nếu ai đó từ chối lời mời của bạn.
 
 ---
 
-**Version**: 1.0.0  
-**Last Updated**: October 28, 2025
+## Tham khảo Nhanh
 
-Happy Gaming! 🎮
+### Các Hành động Chính
+
+| Hành động | Cách thực hiện |
+|-----------|----------------|
+| Thêm Bạn bè | Nhấp biểu tượng + → Tìm kiếm → Add Friend |
+| Xem Bạn bè | Nhấp biểu tượng Friends trên màn hình chính |
+| Chấp nhận Lời mời | Friend Requests → Accept |
+| Xóa Bạn bè | Friend List → Chọn Bạn bè → Remove |
+| Chặn Người dùng | Profile → Block User |
+| Tìm kiếm Người chơi | Add Friend → Search by Username/ID |
+| Cập nhật Profile | Menu → Profile → Edit |
+
+### Phím tắt (nếu có)
+
+| Phím tắt | Hành động |
+|----------|-----------|
+| F | Mở Danh sách Bạn bè |
+| R | Mở Lời mời Kết bạn |
+| Ctrl+F | Tìm kiếm trong Danh sách Bạn bè |
+| Esc | Đóng Cửa sổ Hiện tại |
+
+---
+
+## Kết luận
+
+Hệ thống Bạn bè được thiết kế để giúp bạn xây dựng kết nối và nâng cao trải nghiệm gaming. Dù bạn đang chơi với bạn bè cũ hay kết bạn mới, những tính năng này giúp bạn dễ dàng giữ liên lạc.
+
+**Hãy nhớ**:
+- Tôn trọng những người chơi khác
+- Sử dụng tính năng quyền riêng tư để bảo vệ bản thân
+- Vui vẻ và tận hưởng việc chơi với bạn bè!
+
+Để biết thêm thông tin, hãy xem:
+- [Tài liệu API](Server/API_DOCUMENTATION.md) (dành cho developers)
+- [Hướng dẫn Setup](Server/SETUP.md)
+- Hệ thống Help trong game
+
+---
+
+**Phiên bản**: 1.0.0  
+**Cập nhật lần cuối**: 28 tháng 10, 2025
+
+Chơi game vui vẻ! 🎮

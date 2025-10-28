@@ -1,43 +1,43 @@
-# Security Features Implementation Summary
+# Tóm tắt Triển khai Security Features - Hướng dẫn Sử dụng
 
-## Task 20: Implement Security Features (Server)
+## Task 20: Triển khai Security Features (Server)
 
-All sub-tasks have been completed successfully.
+Tất cả sub-tasks đã được hoàn thành thành công.
 
-### ✅ Task 20.1: Data Encryption (Requirements: 5.1, 5.4)
+### ✅ Task 20.1: Data Encryption (Yêu cầu: 5.1, 5.4)
 
-**Files Created:**
+**Files Đã tạo:**
 - `Server/src/utils/encryption.ts` - AES-256-GCM encryption utilities
-- `Server/src/middleware/https.ts` - HTTPS enforcement and security headers
+- `Server/src/middleware/https.ts` - HTTPS enforcement và security headers
 
-**Features Implemented:**
-- AES-256-GCM encryption with PBKDF2 key derivation
-- Encrypt/decrypt functions for sensitive data
-- HTTPS enforcement middleware (production only)
-- Security headers (X-Frame-Options, CSP, HSTS, etc.)
-- Hash functions for one-way data hashing
+**Tính năng Đã triển khai:**
+- AES-256-GCM encryption với PBKDF2 key derivation
+- Encrypt/decrypt functions cho sensitive data
+- HTTPS enforcement middleware (chỉ production)
+- Security headers (X-Frame-Options, CSP, HSTS, v.v.)
+- Hash functions cho one-way data hashing
 - Secure token generation
 
-**Configuration:**
-- Added `ENCRYPTION_SECRET` to `.env.example`
+**Cấu hình:**
+- Đã thêm `ENCRYPTION_SECRET` vào `.env.example`
 
-### ✅ Task 20.2: Rate Limiting (Requirements: 5.2)
+### ✅ Task 20.2: Rate Limiting (Yêu cầu: 5.2)
 
-**Files Created:**
+**Files Đã tạo:**
 - `Server/src/middleware/rateLimit.ts` - Flexible rate limiting middleware
 
-**Features Implemented:**
-- Redis-backed rate limiting (with in-memory fallback)
-- Friend request rate limiter (20 per day)
-- General API rate limiter (100 per 15 minutes)
-- Authentication rate limiter (5 per 15 minutes)
-- Search rate limiter (30 per minute)
+**Tính năng Đã triển khai:**
+- Redis-backed rate limiting (với in-memory fallback)
+- Friend request rate limiter (20 mỗi ngày)
+- General API rate limiter (100 mỗi 15 phút)
+- Authentication rate limiter (5 mỗi 15 phút)
+- Search rate limiter (30 mỗi phút)
 - Custom rate limiter factory
 - Rate limit headers (X-RateLimit-*)
-- Automatic cleanup for memory store
+- Automatic cleanup cho memory store
 
-**Integration:**
-- Updated `FriendService.sendFriendRequest()` documentation to note rate limiting
+**Tích hợp:**
+- Đã cập nhật tài liệu `FriendService.sendFriendRequest()` để ghi chú rate limiting
 
 ### ✅ Task 20.3: Block List (Requirements: 5.3)
 

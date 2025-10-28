@@ -1,12 +1,12 @@
-# Friend System Server - Setup Guide
+# Hệ thống Bạn bè Server - Hướng dẫn Thiết lập
 
-## Step 1: Install PostgreSQL
+## Bước 1: Cài đặt PostgreSQL
 
 ### Windows
-1. Download PostgreSQL from https://www.postgresql.org/download/windows/
-2. Run the installer and follow the setup wizard
-3. Remember your postgres user password
-4. Default port is 5432
+1. Tải PostgreSQL từ https://www.postgresql.org/download/windows/
+2. Chạy installer và làm theo hướng dẫn thiết lập
+3. Nhớ mật khẩu postgres user
+4. Port mặc định là 5432
 
 ### macOS
 ```bash
@@ -21,15 +21,15 @@ sudo apt install postgresql postgresql-contrib
 sudo systemctl start postgresql
 ```
 
-## Step 2: Create Database
+## Bước 2: Tạo Database
 
-Open PostgreSQL command line (psql) or use pgAdmin:
+Mở PostgreSQL command line (psql) hoặc sử dụng pgAdmin:
 
 ```sql
--- Connect as postgres user
+-- Kết nối với postgres user
 CREATE DATABASE friend_system_db;
 
--- Verify database was created
+-- Xác minh database đã được tạo
 \l
 ```
 

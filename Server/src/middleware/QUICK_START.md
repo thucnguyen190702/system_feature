@@ -1,10 +1,10 @@
-# Authentication Middleware - Quick Start Guide
+# Authentication Middleware - Hướng dẫn Khởi động Nhanh - Hướng dẫn Sử dụng
 
-## 🚀 Quick Setup
+## 🚀 Thiết lập Nhanh
 
-### 1. Environment Configuration
+### 1. Cấu hình Môi trường
 
-Add to your `.env` file:
+Thêm vào file `.env` của bạn:
 ```env
 JWT_SECRET=your_super_secret_key_change_this_in_production
 JWT_EXPIRES_IN=7d

@@ -1,43 +1,43 @@
-# Friend System Deployment Guide
+# Hướng dẫn Deployment Hệ thống Bạn bè - Hướng dẫn Sử dụng
 
-This guide provides step-by-step instructions for deploying the Friend System server in various environments.
+Hướng dẫn này cung cấp các bước chi tiết để deploy Friend System server trong các môi trường khác nhau.
 
-## Table of Contents
+## Mục lục
 
-1. [Prerequisites](#prerequisites)
-2. [Environment Setup](#environment-setup)
+1. [Yêu cầu Tiên quyết](#yêu-cầu-tiên-quyết)
+2. [Thiết lập Môi trường](#thiết-lập-môi-trường)
 3. [Local Development Deployment](#local-development-deployment)
 4. [Docker Deployment](#docker-deployment)
 5. [Production Deployment](#production-deployment)
 6. [Database Migrations](#database-migrations)
-7. [Monitoring and Maintenance](#monitoring-and-maintenance)
-8. [Troubleshooting](#troubleshooting)
+7. [Monitoring và Bảo trì](#monitoring-và-bảo-trì)
+8. [Xử lý Sự cố](#xử-lý-sự-cố)
 
 ---
 
-## Prerequisites
+## Yêu cầu Tiên quyết
 
-### Required Software
+### Phần mềm Cần thiết
 
-- **Node.js**: Version 18 or higher
-- **npm**: Version 8 or higher
-- **PostgreSQL**: Version 14 or higher
-- **Docker** (optional): Version 20.10 or higher
-- **Docker Compose** (optional): Version 2.0 or higher
-- **Redis** (optional): Version 7 or higher (for caching)
+- **Node.js**: Phiên bản 18 trở lên
+- **npm**: Phiên bản 8 trở lên
+- **PostgreSQL**: Phiên bản 14 trở lên
+- **Docker** (tùy chọn): Phiên bản 20.10 trở lên
+- **Docker Compose** (tùy chọn): Phiên bản 2.0 trở lên
+- **Redis** (tùy chọn): Phiên bản 7 trở lên (cho caching)
 
-### System Requirements
+### Yêu cầu Hệ thống
 
-**Minimum**:
+**Tối thiểu**:
 - CPU: 2 cores
 - RAM: 2 GB
 - Storage: 10 GB
 
-**Recommended**:
+**Khuyến nghị**:
 - CPU: 4 cores
 - RAM: 4 GB
 - Storage: 20 GB
-- SSD for database
+- SSD cho database
 
 ---
 

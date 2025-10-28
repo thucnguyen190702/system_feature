@@ -1,34 +1,34 @@
-# Security Features Quick Start Guide
+# Security Features - Hướng dẫn Khởi động Nhanh - Hướng dẫn Sử dụng
 
-Get the security features up and running in 5 minutes.
+Khởi động security features trong 5 phút.
 
-## 1. Environment Setup (1 minute)
+## 1. Thiết lập Môi trường (1 phút)
 
-Add to your `.env` file:
+Thêm vào file `.env` của bạn:
 
 ```env
-# Required for encryption
+# Bắt buộc cho encryption
 ENCRYPTION_SECRET=change_this_to_a_secure_random_string_at_least_32_characters_long
 
-# Optional: Redis for distributed rate limiting
+# Tùy chọn: Redis cho distributed rate limiting
 REDIS_HOST=localhost
 REDIS_PORT=6379
 
-# Enable HTTPS enforcement in production
+# Bật HTTPS enforcement trong production
 NODE_ENV=production
 ```
 
-## 2. Run Database Migration (1 minute)
+## 2. Chạy Database Migration (1 phút)
 
-Create the blocked_accounts table:
+Tạo bảng blocked_accounts:
 
 ```bash
 npm run migration:run
 ```
 
-## 3. Apply Middleware (2 minutes)
+## 3. Áp dụng Middleware (2 phút)
 
-Update `src/index.ts`:
+Cập nhật `src/index.ts`:
 
 ```typescript
 import express from 'express';
@@ -37,17 +37,17 @@ import { generalRateLimiter } from './middleware/rateLimit';
 
 const app = express();
 
-// Apply security middleware BEFORE routes
-app.use(enforceHttps);           // Enforce HTTPS in production
-app.use(securityHeaders);         // Add security headers
-app.use('/api', generalRateLimiter);  // Rate limit all API routes
+// Áp dụng security middleware TRƯỚC routes
+app.use(enforceHttps);           // Enforce HTTPS trong production
+app.use(securityHeaders);         // Thêm security headers
+app.use('/api', generalRateLimiter);  // Rate limit tất cả API routes
 
-// ... your routes here
+// ... routes của bạn ở đây
 ```
 
-## 4. Add Block Routes (1 minute)
+## 4. Thêm Block Routes (1 phút)
 
-Add block management endpoints:
+Thêm block management endpoints:
 
 ```typescript
 import { Router } from 'express';

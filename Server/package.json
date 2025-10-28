@@ -15,6 +15,7 @@
     "schema:verify": "ts-node src/scripts/verify-schema.ts",
     "verify:schema": "ts-node src/scripts/verify-schema.ts",
     "db:test": "ts-node src/scripts/test-connection.ts",
+    "seed:accounts": "ts-node src/scripts/seed-accounts.ts",
     "test": "jest --runInBand",
     "test:watch": "jest --watch --runInBand",
     "test:coverage": "jest --coverage --runInBand",
