@@ -3,16 +3,18 @@ module.exports = {
   testEnvironment: 'node',
   roots: ['<rootDir>/src'],
   testMatch: ['**/__tests__/**/*.test.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/__tests__/setup.ts'],
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/*.d.ts',
     '!src/migrations/**',
-    '!src/index.ts'
+    '!src/__tests__/**',
   ],
-  moduleFileExtensions: ['ts', 'js', 'json'],
-  transform: {
-    '^.+\\.ts$': 'ts-jest'
-  },
+  coverageDirectory: 'coverage',
+  verbose: true,
+  forceExit: true,
+  clearMocks: true,
+  resetMocks: true,
+  restoreMocks: true,
   testTimeout: 30000,
-  setupFilesAfterEnv: ['<rootDir>/src/__tests__/setup.ts']
 };

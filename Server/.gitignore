@@ -1,26 +1,19 @@
 # Dependencies
 node_modules/
-package-lock.json
-yarn.lock
 
 # Build output
 dist/
-build/
 
 # Environment variables
 .env
 
 # Logs
-logs/*.log
+logs/
 *.log
-npm-debug.log*
-!logs/.gitkeep
 
 # IDE
 .vscode/
 .idea/
-*.swp
-*.swo
 
 # OS
 .DS_Store

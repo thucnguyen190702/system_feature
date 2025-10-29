@@ -1,32 +1,17 @@
-import { AppDataSource } from '../config/database';
-import dotenv from 'dotenv';
+import { DatabaseConfig } from '../shared/database/database.config';
 
-// Load environment variables
-dotenv.config();
-
-// Setup before all tests
+/**
+ * Setup test environment
+ */
 beforeAll(async () => {
-  try {
-    // Initialize database connection
-    if (!AppDataSource.isInitialized) {
-      await AppDataSource.initialize();
-      console.log('✅ Test database connection established');
-    }
-  } catch (error) {
-    console.error('❌ Failed to connect to test database:', error);
-    throw error;
-  }
-}, 30000);
+  // Initialize database connection
+  await DatabaseConfig.initialize();
+});
 
-// Cleanup after all tests
+/**
+ * Cleanup after all tests
+ */
 afterAll(async () => {
-  try {
-    // Close database connection
-    if (AppDataSource.isInitialized) {
-      await AppDataSource.destroy();
-      console.log('✅ Test database connection closed');
-    }
-  } catch (error) {
-    console.error('❌ Failed to close test database connection:', error);
-  }
-}, 30000);
+  // Close database connection
+  await DatabaseConfig.close();
+});
