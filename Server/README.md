@@ -1,102 +1,194 @@
-# Hệ thống Bạn bè Server - Hướng dẫn Sử dụng
+# Authentication Server
 
-Node.js TypeScript server cho Hệ thống Bạn bè với cơ sở dữ liệu PostgreSQL.
+Node.js TypeScript server for game authentication system.
 
-## Yêu cầu Tiên quyết
+## Project Structure
 
-- Node.js 18+ LTS
-- PostgreSQL 14+
-- npm hoặc yarn
+```
+server/
+├── src/
+│   ├── modules/
+│   │   └── auth/                    # Authentication module
+│   │       ├── auth.module.ts       # Module entry point
+│   │       ├── auth.controller.ts   # HTTP endpoints
+│   │       ├── auth.service.ts      # Business logic
+│   │       ├── auth.repository.ts   # Data access
+│   │       ├── entities/
+│   │       │   └── user.entity.ts   # TypeORM entity
+│   │       ├── dto/                 # Data transfer objects
+│   │       │   ├── register.dto.ts
+│   │       │   ├── login.dto.ts
+│   │       │   └── auth-response.dto.ts
+│   │       ├── middleware/
+│   │       │   └── auth.middleware.ts
+│   │       └── types/
+│   │           └── jwt-payload.ts
+│   ├── shared/
+│   │   ├── database/
+│   │   │   └── database.config.ts   # PostgreSQL config
+│   │   ├── utils/
+│   │   │   ├── jwt.util.ts
+│   │   │   └── password.util.ts
+│   │   └── types/
+│   │       └── express.d.ts
+│   ├── config/
+│   │   └── environment.ts           # Environment variables
+│   └── app.ts                       # Application entry
+└── package.json
+```
 
-## Cài đặt
+## Setup
 
-1. Cài đặt dependencies:
+1. Install dependencies:
 ```bash
 npm install
 ```
 
-2. Cấu hình biến môi trường:
+2. Copy environment file:
 ```bash
 cp .env.example .env
-# Chỉnh sửa .env với thông tin database của bạn
 ```
 
-3. Tạo PostgreSQL database:
-```sql
-CREATE DATABASE friend_system_db;
-```
+3. Configure database settings in `.env`
 
-4. Chạy database migrations:
-```bash
-npm run migration:run
-```
-
-## Phát triển
-
-Khởi động development server:
-```bash
-npm run dev
-```
-
-Server sẽ chạy tại `http://localhost:3000`
-
-## Build
-
-Build cho production:
+4. Build the project:
 ```bash
 npm run build
 ```
 
+5. Run database migrations:
+```bash
+npm run migration:run
+```
+
+6. Run development server:
+```bash
+npm run dev
+```
+
 ## Scripts
 
-- `npm run dev` - Khởi động development server với hot reload
-- `npm run build` - Build TypeScript thành JavaScript
-- `npm start` - Khởi động production server
-- `npm run migration:generate` - Tạo migration mới
-- `npm run migration:run` - Chạy các migration đang chờ
-- `npm run migration:revert` - Hoàn tác migration cuối cùng
+- `npm run build` - Compile TypeScript to JavaScript
+- `npm run start` - Run production server
+- `npm run dev` - Run development server with ts-node
 
-## Cấu trúc Dự án
+### Migration Scripts
 
+- `npm run migration:run` - Run all pending migrations
+- `npm run migration:revert` - Revert the last executed migration
+- `npm run migration:show` - Show all migrations and their status
+- `npm run migration:generate -- src/migrations/MigrationName` - Generate a new migration based on entity changes
+- `npm run migration:create -- src/migrations/MigrationName` - Create a blank migration file
+
+### Database Migrations
+
+The project uses TypeORM migrations for database schema management. The initial migration creates the `users` table with:
+
+- **Authentication fields**: id, username, passwordHash
+- **Profile fields**: displayName, avatarUrl, level
+- **Status fields**: onlineStatus, lastOnlineAt
+- **Privacy settings**: privacySettings (JSONB)
+- **Timestamps**: createdAt, updatedAt
+
+**Indexes:**
+- `idx_users_username` - For fast username lookups during login
+- `idx_users_online_status` - For querying online users efficiently
+
+**Constraints:**
+- `chk_username_length` - Ensures username is between 3-50 characters
+- `chk_valid_online_status` - Ensures onlineStatus is one of: 'online', 'offline', 'away', 'busy'
+
+To run migrations in production:
+```bash
+npm run build
+npm run migration:run
 ```
-Server/
-├── src/
-│   ├── config/          # File cấu hình
-│   │   ├── database.ts  # Kết nối database
-│   │   └── logger.ts    # Winston logger
-│   ├── entities/        # TypeORM entities
-│   │   ├── InGameAccount.ts
-│   │   ├── FriendRequest.ts
-│   │   └── FriendRelationship.ts
-│   ├── services/        # Business logic (sẽ được thêm)
-│   ├── controllers/     # API controllers (sẽ được thêm)
-│   ├── middleware/      # Express middleware (sẽ được thêm)
-│   ├── routes/          # API routes (sẽ được thêm)
-│   ├── migrations/      # Database migrations (sẽ được thêm)
-│   └── index.ts         # Entry point ứng dụng
-├── logs/                # Application logs
-├── .env                 # Biến môi trường
-├── .env.example         # Template biến môi trường
-├── package.json         # Dependencies
-└── tsconfig.json        # Cấu hình TypeScript
+
+## Dependencies
+
+- **express** - Web framework
+- **typeorm** - ORM for PostgreSQL
+- **pg** - PostgreSQL driver
+- **jsonwebtoken** - JWT token generation/validation
+- **bcrypt** - Password hashing
+- **class-validator** - DTO validation
+- **class-transformer** - Object transformation
+
+## Integration with Other Modules
+
+### Using Authentication Middleware
+
+To protect your endpoints with authentication, import and apply the `AuthMiddleware`:
+
+```typescript
+import { AuthMiddleware } from './modules/auth/middleware/auth.middleware';
+import { Router } from 'express';
+
+const router = Router();
+
+// Protected endpoint - requires authentication
+router.get('/api/your-endpoint', 
+  AuthMiddleware.authenticate,
+  async (req, res) => {
+    // Access authenticated user data
+    const userId = req.user.userId;
+    const username = req.user.username;
+    
+    // Your logic here
+    res.json({ success: true, userId, username });
+  }
+);
 ```
 
-## API Endpoints
+### Accessing Authenticated User Data
 
-Health check:
-- `GET /health` - Trạng thái sức khỏe server
+After authentication middleware validates the token, user information is available in `req.user`:
 
-Thêm endpoints sẽ được thêm trong các task tiếp theo.
+```typescript
+interface AuthenticatedRequest extends Request {
+  user: {
+    userId: string;    // UUID of authenticated user
+    username: string;  // Username of authenticated user
+  };
+}
+```
 
-## Biến Môi trường
+### Example: Creating a Protected Module
 
-Xem `.env.example` để biết tất cả các tùy chọn cấu hình có sẵn.
+```typescript
+// your-module.controller.ts
+import { Router, Request, Response } from 'express';
+import { AuthMiddleware } from '../auth/middleware/auth.middleware';
 
-## Database Schema
+export class YourController {
+  private router: Router;
+  
+  constructor() {
+    this.router = Router();
+    this.registerRoutes();
+  }
+  
+  private registerRoutes(): void {
+    // Apply middleware to protect routes
+    this.router.get('/api/your-data', 
+      AuthMiddleware.authenticate,
+      this.getData.bind(this)
+    );
+  }
+  
+  private async getData(req: Request, res: Response): Promise<void> {
+    const userId = req.user.userId;
+    // Fetch user-specific data
+    res.json({ success: true, data: {} });
+  }
+  
+  getRouter(): Router {
+    return this.router;
+  }
+}
+```
 
-Database sử dụng ba bảng chính:
-- `accounts` - Tài khoản người dùng
-- `friend_requests` - Bản ghi lời mời kết bạn
-- `friend_relationships` - Kết nối bạn bè
-
-Schema chi tiết sẽ được tạo trong task tiếp theo (triển khai Database Schema).
+For complete integration examples and best practices, see:
+- [Integration Guide](../.kiro/specs/authentication-system/INTEGRATION_GUIDE.md)
+- [Quick Reference](../.kiro/specs/authentication-system/QUICK_INTEGRATION_REFERENCE.md)
+- [Example Modules](../.kiro/specs/authentication-system/examples/)

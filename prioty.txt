@@ -40,3 +40,8 @@ Phase 1 (Tháng 1-2): Friend + Chat → Xã hội cơ bản
 Phase 2 (Tháng 3): Achievement + Leaderboard → Engagement
 Phase 3 (Tháng 4): Clan → Community
 Phase 4 (Tháng 5-6): Battle Pass + Live Events → Monetization & Retention
+
+trong friend-system, với tư các CPO, Tech Lead, Game Expert, QA Expert. Từ file requirements.md hãy tạo design với server Nodejs Typescripts, Client Unity C#, database postgreSQL. Server theo kiến trúc modular monolith architecture. Client đóng gói theo Module.
+Authentication System (tasks 1-20) - Tạo foundation
+Friend System (tasks 1-23) - Extend với social features
+Integration Testing - Verify everything works together
